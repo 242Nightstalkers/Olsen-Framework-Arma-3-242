@@ -26,67 +26,59 @@ NEWTAB("I. Situation:")
 
 /*------------------------ SITUATION ------------------------ */
 <font color='#5BD527' size='16'>Situation:</font><br/>
-<br/>
 /*
 Provides information essential to subordinate leader’s understanding of the situation.  Should be no more than a paragraph<br/>
 */
-<br/>
-<br/>
-
+<br/><br/>
 /*------------------------ SITUATION - TERRAIN ------------------------*/
 <font color='#5BD527' size='16'>Terrain:</font><br/>
-<br/>
 /*
 USE OCOKA
 Observation and Fields of Fire, Cover and Concealment,
 Obstacles (man made and natural), Key or Decisive Terrain, Avenues of Approach<br/>
 */
-<br/>
-<br/>
+
+<br/><br/>
 /*------------------------ SITUATION - KEY TERRAIN ------------------------*/
 <font color='#5BD527' size='16'>Key Terrain:</font><br/>
-<br/>
 //key terrain refers to areas which, if seized, afford an advantage to an attacker or defender. 
 //Key terrain might include a hill that overlooks a valley an enemy wants to control or a crossing point over a river that must be traversed before launching an attack.
-<br/>
-<br/>
+
+<br/><br/>
 /*------------------------ SITUATION - WEATHER ------------------------*/
 <font color='#5BD527' size='16'>Weather and Forecast:</font><br/>
-<br/>
 /*
 //What's the weather like. Please include any WX or forescasts for things like Fog, rain, or obscured vision. 
 Also include the max view distance settings
 
 */
-View Range at Ground level: 3500 Meters.
-<br/>
+<br/>View Range at Ground level: 3500 Meters.
 ENDTAB;
 
 
-/* ------------------------------------------------ IA. ENEMY FORCES TAB ------------------------------------------------ */
-NEWTAB("IA. Enemy Forces:")
+/* ------------------------------------------------ I-A. ENEMY FORCES TAB ------------------------------------------------ */
+NEWTAB("I-a. Enemy Forces:")
 
 /*------------------------ A. ENEMY DISPOSITION ------------------------*/
 <font color='#5BD527' size='16'>Disposition</font><br/>
-<br/>
 //If force composition this high is not known, feel free to make them up! It adds a lot to your mission if you really fill it out!
-//Use METIS MARKERS underlaid with empty markers to get the units placed
+//Use METIS MARKERS underlaid with empty markers to get the units placed.
+//The dash there is as close to grey as I'm willing to make it, someone else can fuck around with it.
 1st Amphibious Combined Arms Brigade<br/>
-   - 34th Mechanized Infantry Battalion<br/>
-      - <marker name = 'OpUnit4'>A Company</marker> (Infantry)<br/>
-      - <marker name = 'OpUnit3'>B Company</marker> (Infantry)<br/>
-      - C Company (Mech. Inf.)<br/>     
-         - <marker name = 'OpUnit1'>4th Platoon</marker><br/>
-         - <marker name = 'OpUnit5'>3rd Platoon</marker><br/>
-      - <marker name = 'OpUnit6'>D Company</marker> (Service/Support)<br/>
-   - 61st Mobile Artillery Battlaion<br/>
-      - E Company (Artillery)<br/>
-         - <marker name = 'OpUnit2'>2nd Platoon</marker><br/>
+<font color='#2E2E2E'>-</font color>    - 34th Mechanized Infantry Battalion<br/>
+<font color='#2E2E2E'>-</font color>       - <marker name = 'OpUnit4'>A Company</marker><br/>
+<font color='#2E2E2E'>-</font color>       - <marker name = 'OpUnit3'>B Company</marker><br/>
+<font color='#2E2E2E'>-</font color>       - C Company)<br/>     
+<font color='#2E2E2E'>-</font color>          - <marker name = 'OpUnit1'>4th Platoon</marker><br/>
+<font color='#2E2E2E'>-</font color>          - <marker name = 'OpUnit5'>3rd Platoon</marker><br/>
+<font color='#2E2E2E'>-</font color>       - <marker name = 'OpUnit6'>D Company</marker><br/>
+<font color='#2E2E2E'>-</font color>    - 61st Mobile Artillery Battalion<br/>
+<font color='#2E2E2E'>-</font color>       - E Company<br/>
+<font color='#2E2E2E'>-</font color>          - <marker name = 'OpUnit2'>2nd Platoon</marker>
 <br/><br/>
 /*------------------------ ENEMY - EQUIPMENT ------------------------*/
 <font color='#5BD527' size='16'>Equipment and Appearance:</font><br/>
-[Structure and Size of the Enemy’s units]<br/><br/>
-
+//[Structure and Size of the Enemy’s units]<br/><br/>
 <font size='10'>(Enemy equipment composition is approximate)</font><br/>
 <font color='#5BD527' size='15'>Details:</font><br/>
 <font color='#3361FF' size='13'>Vehicles:</font><br/>  
@@ -95,68 +87,65 @@ NEWTAB("IA. Enemy Forces:")
 <font color='#3361FF' size='13'>Weapons:</font><br/>
 • <font color='#C41D1D' size='14'>AK-74M</font><br/><br/>  
  
-
+/*
+                                    LEGEND
+<font color='#61FF33' size='13'>Yes</font><br/> for equipment Enemy has
+<font color='#C41D1D' size='13'>No</font><br/> for equipment Enemy does not have
+*/
 <font color='#3361FF' size='13'>Gear:</font><br/>
 • NVGs: <font color='#61FF33' size='13'>Yes</font><br/> //Yes is a green color 
 • Thermals: <<font color='#61FF33' size='13'>Yes</font><br/> //No is a Red Color  
 • IR Lasers: <font color='#61FF33' size='13'>Yes</font><br/> 
 • Suppressors: <font color='#C41D1D' size='13'>No</font><br/>   
 • Optics Strength: 1x-4x <br/>  
-• Uniform Pattern(s): EMR (Russian Digital Green Woodland)<br/>
-
-/*
-                                    LEGEND
-<font color='#61FF33' size='13'>Yes</font><br/> for equipment Enemy has
-<font color='#61FF33' size='13'>Yes</font><br/> for equipment Enemy does not have
-*/
+• Uniform Pattern(s): EMR (Russian Digital Green Woodland)
 
 <br/><br/>
 /*------------------------ ENEMY - MLCOA ------------------------*/
 <font color='#5BD527' size='16'>Enemy Most Likely Course Of Action:</font><br/>
 <br/>
 //MOST DANGEROUS COURSE OF ACTION
-<br/>
 
 <br/><br/>
 /*------------------------ ENEMY - MDCOA ------------------------*/
 <font color='#5BD527' size='16'>Enemy Most Dangerous Course Of Action:</font><br/>
 <br/>
-
 //MOST DANGEROUS COURSE OF ACTION
-<br/>
 ENDTAB;
 
 /* ------------------------------------------------ 1B. FRIENDLY FORCES TAB ------------------------------------------------ */
 
-NEWTAB("IB. Friendly Forces:")
+NEWTAB("I-b. Friendly Forces:")
 <font color='#5BD527' size='16'>Disposition And Strength:</font><br/>
 <br/>
+
+//Player disposition
 242nd Armored Brigade Combat Team 'Nightstalkers'<br/> 
-   - <marker name = '242OrbatA1'>1st Battalion</marker><br/>
-      - HQ Company<br/> 
-         - 1st Platoon (Recon.)<br/> 
-           - <marker name = 'BlUnit1'>1st Section</marker><br/>
-           - <marker name = 'BlUnit2'>2nd Section</marker><br/>
-      - A Company (Mech. Inf.)<br/>
-         - <marker name = 'BlUnit3'>1st Platoon</marker><br/>
-         - <marker name = 'BlUnit4'>2nd Platoon</marker><br/>
-      - D Company (Armor)<br/>
-         - <marker name = 'BlUnit5'>1st Platoon</marker><br/>
-         - <marker name = 'BlUnit6'>2nd Platoon</marker><br/> 
-	- Fires Battalion<br/>
-      - Battery A (Artillery)<br/>
-         - <marker name = 'BlUnit7'>1st Platoon</marker><br/>
-         - <marker name = 'BlUnit8'>2nd Platoon</marker><br/>		 
-      - Battery B (Artillery)<br/>
-         - <marker name = 'BlUnit9'>1st Platoon</marker><br/>
-         - <marker name = 'BlUnit10'>2nd Platoon</marker><br/>	
-      - Battery C (Artillery)<br/>
-         - <marker name = 'BlUnit11'>1st Platoon</marker><br/>
-         - <marker name = 'BlUnit12'>2nd Platoon</marker><br/>		 		 
-      - E Company (Logistics)<br/><br/>
+<font color='#2E2E2E'>-</font color>    - <marker name = '242OrbatA1'>1st Battalion</marker><br/>
+<font color='#2E2E2E'>-</font color>       - HQ Company<br/> 
+<font color='#2E2E2E'>-</font color>          - 1st Platoon (Recon.)<br/> 
+<font color='#2E2E2E'>-</font color>            - <marker name = 'BlUnit1'>1st Section</marker><br/>
+<font color='#2E2E2E'>-</font color>            - <marker name = 'BlUnit2'>2nd Section</marker><br/>
+<font color='#2E2E2E'>-</font color>       - A Company (Mech. Inf.)<br/>
+<font color='#2E2E2E'>-</font color>          - <marker name = 'BlUnit3'>1st Platoon</marker><br/>
+<font color='#2E2E2E'>-</font color>          - <marker name = 'BlUnit4'>2nd Platoon</marker><br/>
+<font color='#2E2E2E'>-</font color>       - D Company (Armor)<br/>
+<font color='#2E2E2E'>-</font color>          - <marker name = 'BlUnit5'>1st Platoon</marker><br/>
+<font color='#2E2E2E'>-</font color>          - <marker name = 'BlUnit6'>2nd Platoon</marker><br/> 
+<font color='#2E2E2E'>-</font color> 	- Fires Battalion<br/>
+<font color='#2E2E2E'>-</font color>       - Battery A (Artillery)<br/>
+<font color='#2E2E2E'>-</font color>          - <marker name = 'BlUnit7'>1st Platoon</marker><br/>
+<font color='#2E2E2E'>-</font color>          - <marker name = 'BlUnit8'>2nd Platoon</marker><br/>		 
+<font color='#2E2E2E'>-</font color>       - Battery B (Artillery)<br/>
+<font color='#2E2E2E'>-</font color>          - <marker name = 'BlUnit9'>1st Platoon</marker><br/>
+<font color='#2E2E2E'>-</font color>          - <marker name = 'BlUnit10'>2nd Platoon</marker><br/>	
+<font color='#2E2E2E'>-</font color>       - Battery C (Artillery)<br/>
+<font color='#2E2E2E'>-</font color>          - <marker name = 'BlUnit11'>1st Platoon</marker><br/>
+<font color='#2E2E2E'>-</font color>          - <marker name = 'BlUnit12'>2nd Platoon</marker><br/>		 		 
+<font color='#2E2E2E'>-</font color>       - E Company (Logistics)
 <br/>
 <br/>
-/*------------------------ ENEMY - Equipment and Appearance ------------------------*/
+/*------------------------ FRIENDLY - Equipment and Appearance ------------------------*/
 <font color='#5BD527' size='15'>Equipment and Appearance::</font><br/>
 [Structure and Size of friendly units]<br/><br/>
 
@@ -174,7 +163,7 @@ NEWTAB("IB. Friendly Forces:")
 
 <font color='#3361FF' size='13'>Weapons:</font><br/>
 • MX Series Rifles<br/>
-• MXSW Support WEapon<br/>
+• MXSW Support Weapon<br/>
 • SPMG<br/>
 • XM-25 40mm<br/>
 • M3 MAAWS (AT)<br/> 
@@ -192,33 +181,36 @@ NEWTAB("IB. Friendly Forces:")
 */
 
 ENDTAB;
-
-
 /* ------------------------------------------------ 2. MISSION TAB ------------------------------------------------ */
 
 NEWTAB("II. Mission:")
+/*------------------------ MISSION - MISSION ------------------------*/
+<font color='#5BD527' size='16'>Mission:</font><br/>
 //What just happened and what is the mission?
 ENDTAB;
 
-
-
 /* ------------------------------------------------ 5. EXECUTION TAB ------------------------------------------------ */
 NEWTAB("III. Execution:")
-
+/*------------------------ EXECUTION - COMMANDERS INTENT ------------------------*/
 <font color='#5BD527' size='16'>Command Intent:</font><br/>
 <br/>
 //[What does the Commander want to achieve by completing this mission?]<br/><br/>
-
+<br/>
+<br/>
+/*------------------------ EXECUTION - Maneuver ------------------------*/
 <font color='#5BD527' size='16'>Maneuver:</font><br/>
 /*
 [How will the Players maneuver through the map?]<br/><br/> 
 Are there any roads and such that they must use or avoid?
 */
-
+<br/>
+<br/>
+/*------------------------ EXECUTION - TIMINGS ------------------------*/
 <font color='#5BD527' size='16'>Timings:</font><br/>
+Mission Time Limit - Mission must be completed by 21:50 - 50 Minutes
 
-[Mission Time Limit (Mission must be completed by 21:50 (50 Minutes))]<br/><br/>
-
+<br/><br/>
+/*------------------------ EXECUTION -TASKS ------------------------*/
 <font color='#5BD527' size='16'>Tasks:</font><br/>
 //[What Tasks do the Players have to complete?]
 • TASK1<br/>  
@@ -232,7 +224,17 @@ ENDTAB;
 
 /* ------------------------------------------------ 6. SERVICE AND SUPPORT TAB------------------------------------- */
 NEWTAB("IV. Service Support:")
-//List any Artillery or Repair/Rearm/Refueling services here. This includes stuff like fuel or repair trucks in the base for aircraft.
+/*------------------------ Service and Support - Artillery ------------------------*/
+<font color='#5BD527' size='16'>Artillery:</font><br/>
+
+<br/><br/>
+/*------------------------ Service and Support - Aircraft ------------------------*/
+<font color='#5BD527' size='16'>Aircraft:</font><br/>
+
+<br/><br/>
+/*------------------------ Service and Support - Support ------------------------*/
+<font color='#5BD527' size='16'>Services:</font><br/>
+
 ENDTAB;
 
 
