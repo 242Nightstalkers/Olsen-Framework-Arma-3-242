@@ -1,13 +1,10 @@
-private _westCasualty = "USMC" call FUNC(CasualtyPercentage); //Gets the casualty percentage of team "USMC"
-private _eastCasualty = "VDV" call FUNC(CasualtyPercentage); //Gets the casualty percentage of team "VDV"
+private _westCasualty = "United States Army" call FUNC(CasualtyPercentage); //Gets the casualty percentage of team "United States army" Define Teams in ServerSettings.hpp
+
 
 if (_westCasualty >= 50) exitWith {
-	"VDV VICTORY<br />USMC has retreated due to casualties." call FUNC(EndMission);
+	"US Forces had to retreat due to casualties" call FUNC(EndMission);
 };
 
-if (_eastCasualty >= 75) exitWith {
-	"USMC VICTORY<br />VDV has retreated due to casualties." call FUNC(EndMission);
-};
 
 /*
 Alternative methods of counting casualties

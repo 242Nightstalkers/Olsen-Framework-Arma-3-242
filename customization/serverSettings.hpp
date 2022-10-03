@@ -17,7 +17,7 @@ CoC_Changed_Message = true;
 
 class Teams {
     class west {
-        name = "USMC";
+        name = "United States Army";
         type = "player";
         /*
             Respawn tickets per side. Total number of respawns that a side can have during a mission.
@@ -41,7 +41,7 @@ class Teams {
         endScreenDisplay = true;
     };
     class east {
-        name = "VDV";
+        name = "Russian Army";
         type = "ai";
         respawnTickets = -1;
         waveSize = 0;
@@ -51,7 +51,7 @@ class Teams {
         endScreenDisplay = true;
     };
     class independent {
-        name = "Local Militia";
+        name = "People's Liberation Army" ;
         type = "ai";
         respawnTickets = -1;
         waveSize = 0;

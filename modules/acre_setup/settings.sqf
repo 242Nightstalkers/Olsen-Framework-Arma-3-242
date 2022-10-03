@@ -41,40 +41,40 @@ GVAR(ACRE_Enable_Channel_Names) = false;
 
 GVAR(ACRE_ChannelNames) = [
 	[//WEST - USE SIDE SETTINGS ONLY IF SCRAMBLE IS ON
-		[1, "label", "PLTNET 1"],
-		[2, "label", "PLTNET 2"],
-		[3, "label", "PLTNET 3"],
-		[4, "label", "PLTNET 4"],
-		[5, "label", "COY"],
+		[1, "label", "A COY 1"],
+		[2, "label", "1 PLT COM"],
+		[3, "label", "1 PLT CNV "],
+		[4, "label", "2 PLT COM"],
+		[5, "label", "2 PLT CNV"],
 		[6, "label", "CAS"],
-		[7, "label", "FIRES"]
+		[7, "label", "AIR"]
 	],
 	[//EAST
-		[1, "label", "PLTNET 1"],
-		[2, "label", "PLTNET 2"],
-		[3, "label", "PLTNET 3"],
-		[4, "label", "PLTNET 4"],
-		[5, "label", "COY"],
+		[1, "label", "A COY 1"],
+		[2, "label", "1 PLT COM"],
+		[3, "label", "1 PLT CNV "],
+		[4, "label", "2 PLT COM"],
+		[5, "label", "2 PLT CNV"],
 		[6, "label", "CAS"],
-		[7, "label", "FIRES"]
+		[7, "label", "AIR"]
 	],
 	[//INDEPENDENT
-		[1, "label", "PLTNET 1"],
-		[2, "label", "PLTNET 2"],
-		[3, "label", "PLTNET 3"],
-		[4, "label", "PLTNET 4"],
-		[5, "label", "COY"],
+		[1, "label", "A COY 1"],
+		[2, "label", "1 PLT COM"],
+		[3, "label", "1 PLT CNV "],
+		[4, "label", "2 PLT COM"],
+		[5, "label", "2 PLT CNV"],
 		[6, "label", "CAS"],
-		[7, "label", "FIRES"]
+		[7, "label", "AIR"]
 	],
 	[//DEFAULT - USE THIS IF SCRAMBLE IS OFF
-		[1, "label", "PLTNET 1"],
-		[2, "label", "PLTNET 2"],
-		[3, "label", "PLTNET 3"],
-		[4, "label", "PLTNET 4"],
-		[5, "label", "COY"],
+		[1, "label", "A COY 1"],
+		[2, "label", "1 PLT COM"],
+		[3, "label", "1 PLT CNV "],
+		[4, "label", "2 PLT COM"],
+		[5, "label", "2 PLT CNV"],
 		[6, "label", "CAS"],
-		[7, "label", "FIRES"]
+		[7, "label", "AIR"]
 	]
 ];
 
