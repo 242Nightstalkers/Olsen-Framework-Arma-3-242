@@ -7,7 +7,7 @@
 * to him what he has and what he must do in order to succeed in his intent                  *   
 *																							*
 * Briefing Code                                                                             *
-* <font color='#BBBBBB' size='16' face='PuristaBold'>This is an example header:</font><br/> *
+* <font color='#BBBBBB' size='16'>This is an example header:</font><br/> *
 * <br/>                                                                                     *
 * TEXT                                                                                      *
 * <br/>                                                                                     *
@@ -25,7 +25,7 @@
 NEWTAB("I. Situation:")
 
 /*------------------------ SITUATION ------------------------ */
-<font color='#5BD527' size='16' face='PuristaBold'>Situation:</font><br/>
+<font color='#5BD527' size='16'>Situation:</font><br/>
 <br/>
 /*
 Provides information essential to subordinate leader’s understanding of the situation.  Should be no more than a paragraph<br/>
@@ -34,7 +34,7 @@ Provides information essential to subordinate leader’s understanding of the si
 <br/>
 
 /*------------------------ SITUATION - TERRAIN ------------------------*/
-<font color='#5BD527' size='16' face='PuristaBold'>Terrain:</font><br/>
+<font color='#5BD527' size='16'>Terrain:</font><br/>
 <br/>
 /*
 USE OCOKA
@@ -44,14 +44,14 @@ Obstacles (man made and natural), Key or Decisive Terrain, Avenues of Approach<b
 <br/>
 <br/>
 /*------------------------ SITUATION - KEY TERRAIN ------------------------*/
-<font color='#5BD527' size='16' face='PuristaBold'>Key Terrain:</font><br/>
+<font color='#5BD527' size='16'>Key Terrain:</font><br/>
 <br/>
 //key terrain refers to areas which, if seized, afford an advantage to an attacker or defender. 
 //Key terrain might include a hill that overlooks a valley an enemy wants to control or a crossing point over a river that must be traversed before launching an attack.
 <br/>
 <br/>
 /*------------------------ SITUATION - WEATHER ------------------------*/
-<font color='#5BD527' size='16' face='PuristaBold'>Weather and Forecast:</font><br/>
+<font color='#5BD527' size='16'>Weather and Forecast:</font><br/>
 <br/>
 /*
 //What's the weather like. Please include any WX or forescasts for things like Fog, rain, or obscured vision. 
@@ -63,11 +63,11 @@ View Range at Ground level: 3500 Meters.
 ENDTAB;
 
 
-/* ------------------------------------------------ 1. ENEMY FORCES TAB ------------------------------------------------ */
+/* ------------------------------------------------ 1A. ENEMY FORCES TAB ------------------------------------------------ */
 NEWTAB("IA. Enemy Forces:")
 
 /*------------------------ A. ENEMY DISPOSITION ------------------------*/
-<font color='#5BD527' size='16' face='PuristaBold'>Disposition</font><br/>
+<font color='#5BD527' size='16'>Disposition</font><br/>
 <br/>
 //If force composition this high is not known, feel free to make them up! It adds a lot to your mission if you really fill it out!
 //Use METIS MARKERS underlaid with empty markers to get the units placed
@@ -82,7 +82,6 @@ NEWTAB("IA. Enemy Forces:")
    - 61st Mobile Artillery Battlaion<br/>
       - E Company (Artillery)<br/>
          - <marker name = 'OpUnit2'>2nd Platoon</marker><br/>
-
 <br/><br/>
 /*------------------------ ENEMY - EQUIPMENT ------------------------*/
 <font color='#5BD527' size='16'>Equipment and Appearance:</font><br/>
@@ -113,14 +112,14 @@ NEWTAB("IA. Enemy Forces:")
 
 <br/><br/>
 /*------------------------ ENEMY - MLCOA ------------------------*/
-<font color='#5BD527' size='16' face='PuristaBold'>Enemy Most Likely Course Of Action:</font><br/>
+<font color='#5BD527' size='16'>Enemy Most Likely Course Of Action:</font><br/>
 <br/>
 //MOST DANGEROUS COURSE OF ACTION
 <br/>
 
 <br/><br/>
 /*------------------------ ENEMY - MDCOA ------------------------*/
-<font color='#5BD527' size='16' face='PuristaBold'>Enemy Most Dangerous Course Of Action:</font><br/>
+<font color='#5BD527' size='16'>Enemy Most Dangerous Course Of Action:</font><br/>
 <br/>
 
 //MOST DANGEROUS COURSE OF ACTION
@@ -130,7 +129,7 @@ ENDTAB;
 /* ------------------------------------------------ 1B. FRIENDLY FORCES TAB ------------------------------------------------ */
 
 NEWTAB("IB. Friendly Forces:")
-<font color='#5BD527' size='16' face='PuristaBold'>Disposition And Strength:</font><br/>
+<font color='#5BD527' size='16'>Disposition And Strength:</font><br/>
 <br/>
 242nd Armored Brigade Combat Team 'Nightstalkers'<br/> 
    - <marker name = '242OrbatA1'>1st Battalion</marker><br/>
@@ -221,7 +220,7 @@ Are there any roads and such that they must use or avoid?
 [Mission Time Limit (Mission must be completed by 21:50 (50 Minutes))]<br/><br/>
 
 <font color='#5BD527' size='16'>Tasks:</font><br/>
-[What Tasks do the Players have to complete?]
+//[What Tasks do the Players have to complete?]
 • TASK1<br/>  
 • TASK2<br/>
 • TASK3<br/>
