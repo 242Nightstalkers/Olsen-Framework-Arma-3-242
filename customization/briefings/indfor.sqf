@@ -57,7 +57,7 @@ ENDTAB;
 
 
 /* ------------------------------------------------ I-A. ENEMY FORCES TAB ------------------------------------------------ */
-NEWTAB("I-a. Enemy Forces:")
+NEWTAB(" a. Enemy Forces:")
 
 /*------------------------ A. ENEMY DISPOSITION ------------------------*/
 <font color='#5BD527' size='16'>Disposition</font><br/>
@@ -115,7 +115,7 @@ ENDTAB;
 
 /* ------------------------------------------------ 1B. FRIENDLY FORCES TAB ------------------------------------------------ */
 
-NEWTAB("I-b. Friendly Forces:")
+NEWTAB(" b. Friendly Forces:")
 <font color='#5BD527' size='16'>Disposition And Strength:</font><br/>
 <br/>
 
