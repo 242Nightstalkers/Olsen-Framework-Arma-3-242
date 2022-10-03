@@ -64,7 +64,7 @@ ENDTAB;
 
 
 /* ------------------------------------------------ 1. ENEMY FORCES TAB ------------------------------------------------ */
-NEWTAB("1A. Enemy Forces:")
+NEWTAB("IA. Enemy Forces:")
 
 /*------------------------ A. ENEMY DISPOSITION ------------------------*/
 <font color='#5BD527' size='16' face='PuristaBold'>Disposition</font><br/>
@@ -129,10 +129,10 @@ ENDTAB;
 
 /* ------------------------------------------------ 1B. FRIENDLY FORCES TAB ------------------------------------------------ */
 
-NEWTAB("B. Friendly Forces:")
+NEWTAB("IB. Friendly Forces:")
 <font color='#5BD527' size='16' face='PuristaBold'>Disposition And Strength:</font><br/>
 <br/>
-242nd Armored Brigade Combat Team "Nightstalkers"<br/> 
+242nd Armored Brigade Combat Team 'Nightstalkers'<br/> 
    - <marker name = '242OrbatA1'>1st Battalion</marker><br/>
       - HQ Company<br/> 
          - 1st Platoon (Recon.)<br/> 
