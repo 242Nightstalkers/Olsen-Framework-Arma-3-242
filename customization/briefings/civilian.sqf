@@ -1,5 +1,4 @@
-/*
-*************************************###################*************************************
+/************************************###################*************************************
 *   					              		NOTES                                      		*
 * You are writing this briefing from the perspective of a Company or Battalion Commander    *
 * giving orders to a surbordinate Platoonor Company Commander. You are not writing this     *
@@ -17,58 +16,60 @@
 *<img image='NAME.TYPE' width='INT' height='INT'/> //Add image								*
 *<marker name = 'NAME'>TEXT</marker> //Add clickable marker									*
 *<execute expression = 'CODE'>TEXT</execute> //Execute function hyperlink					*
-*********************************************************************************************
-*/
-
+*********************************************************************************************/
 
 /* ------------------------------------------------ 1. SITUATION TAB ------------------------------------------------ */
 NEWTAB("I. Situation:")
-
-/*------------------------ SITUATION ------------------------ */
-<font color='#5BD527' size='16'>Situation:</font><br/>
-/*
-Provides information essential to subordinate leader’s understanding of the situation.  Should be no more than a paragraph<br/>
+/*------------------------ SITUATION ------------------------ 
+//Provides information essential to subordinate leader’s understanding of the situation.  Should be no more than a paragraph<br/>
 */
+<font color='#5BD527' size='16'>Situation:</font><br/>
+
+
+
 <br/><br/>
-/*------------------------ SITUATION - TERRAIN ------------------------*/
-<font color='#5BD527' size='16'>Terrain:</font><br/>
-/*
+/*------------------------ SITUATION - TERRAIN ------------------------
 USE OCOKA
 Observation and Fields of Fire, Cover and Concealment,
 Obstacles (man made and natural), Key or Decisive Terrain, Avenues of Approach<br/>
 */
+<font color='#5BD527' size='16'>Terrain:</font><br/>
+
+
 
 <br/><br/>
-/*------------------------ SITUATION - KEY TERRAIN ------------------------*/
-<font color='#5BD527' size='16'>Key Terrain:</font><br/>
-//key terrain refers to areas which, if seized, afford an advantage to an attacker or defender. 
-//Key terrain might include a hill that overlooks a valley an enemy wants to control or a crossing point over a river that must be traversed before launching an attack.
-
-<br/><br/>
-/*------------------------ SITUATION - WEATHER ------------------------*/
-<font color='#5BD527' size='16'>Weather and Forecast:</font><br/>
-/*
-//What's the weather like. Please include any WX or forescasts for things like Fog, rain, or obscured vision. 
-Also include the max view distance settings
-
+/*------------------------ SITUATION - KEY TERRAIN ------------------------
+key terrain refers to areas which, if seized, afford an advantage to an attacker or defender. 
+Key terrain might include a hill that overlooks a valley an enemy wants to control or a crossing point over a river that must be traversed before launching an attack.
 */
+<font color='#5BD527' size='16'>Key Terrain:</font><br/>
+
+
+
+<br/><br/>
+/*------------------------ SITUATION - WEATHER ------------------------
+What's the weather like. Please include any WX or forescasts for things like Fog, rain, or obscured vision. 
+Also include the max view distance settings
+*/
+<font color='#5BD527' size='16'>Weather and Forecast:</font><br/>
+
+
+
 <br/>View Range at Ground level: 3500 Meters.
 ENDTAB;
-
-
 /* ------------------------------------------------ I-A. ENEMY FORCES TAB ------------------------------------------------ */
-NEWTAB(" a. Enemy Forces:")
-
-/*------------------------ A. ENEMY DISPOSITION ------------------------*/
-<font color='#5BD527' size='16'>Disposition</font><br/>
-//If force composition this high is not known, feel free to make them up! It adds a lot to your mission if you really fill it out!
-//Use METIS MARKERS underlaid with empty markers to get the units placed.
-//The dash there is as close to grey as I'm willing to make it, someone else can fuck around with it.
+NEWTAB("  A. Enemy Forces:")
+/*------------------------ A. ENEMY DISPOSITION ------------------------
+If force composition this high is not known, feel free to make them up and fill in using the template below! It adds a lot to your mission if you really fill it out!
+Use METIS MARKERS underlaid with empty markers to get the units placed.
+The dash there is as close to grey as I'm willing to make it, someone else can fuck around with it.
+*/
+<font color='#5BD527' size='16'>Disposition and Activity</font><br/>
 1st Amphibious Combined Arms Brigade<br/>
 <font color='#2E2E2E'>-</font color>    - 34th Mechanized Infantry Battalion<br/>
 <font color='#2E2E2E'>-</font color>       - <marker name = 'OpUnit4'>A Company</marker><br/>
 <font color='#2E2E2E'>-</font color>       - <marker name = 'OpUnit3'>B Company</marker><br/>
-<font color='#2E2E2E'>-</font color>       - C Company)<br/>     
+<font color='#2E2E2E'>-</font color>       - C Company<br/>     
 <font color='#2E2E2E'>-</font color>          - <marker name = 'OpUnit1'>4th Platoon</marker><br/>
 <font color='#2E2E2E'>-</font color>          - <marker name = 'OpUnit5'>3rd Platoon</marker><br/>
 <font color='#2E2E2E'>-</font color>       - <marker name = 'OpUnit6'>D Company</marker><br/>
@@ -76,22 +77,18 @@ NEWTAB(" a. Enemy Forces:")
 <font color='#2E2E2E'>-</font color>       - E Company<br/>
 <font color='#2E2E2E'>-</font color>          - <marker name = 'OpUnit2'>2nd Platoon</marker>
 <br/><br/>
-/*------------------------ ENEMY - EQUIPMENT ------------------------*/
-<font color='#5BD527' size='16'>Equipment and Appearance:</font><br/>
-//[Structure and Size of the Enemy’s units]<br/><br/>
-<font size='10'>(Enemy equipment composition is approximate)</font><br/>
-<font color='#5BD527' size='15'>Details:</font><br/>
-<font color='#3361FF' size='13'>Vehicles:</font><br/>  
-• <font color='#C41D1D' size='14'>GAZ-2330 'Tigr'</font><br/><br/>  
-  
-<font color='#3361FF' size='13'>Weapons:</font><br/>
-• <font color='#C41D1D' size='14'>AK-74M</font><br/><br/>  
- 
-/*
-                                    LEGEND
+/*------------------------ ENEMY - EQUIPMENT ------------------------
+Roster of Enemy's Equipment
 <font color='#61FF33' size='13'>Yes</font><br/> for equipment Enemy has
 <font color='#C41D1D' size='13'>No</font><br/> for equipment Enemy does not have
 */
+<font color='#5BD527' size='16'>Equipment and Appearance:</font><br/>
+<font color='#5BD527' size='15'>Details:</font><br/>
+<font color='#3361FF' size='13'>Vehicles:</font><br/>  
+• <font color='#C41D1D' size='14'>GAZ-2330 'Tigr'</font><br/><br/> //Fill it out here by copying until you have all the vehicles  
+<font color='#3361FF' size='13'>Weapons:</font><br/>
+• <font color='#C41D1D' size='14'>AK-74M</font><br/><br/>  //Copy out all the relevant weapons, Rifle, Machinegun
+
 <font color='#3361FF' size='13'>Gear:</font><br/>
 • NVGs: <font color='#61FF33' size='13'>Yes</font><br/> //Yes is a green color 
 • Thermals: <<font color='#61FF33' size='13'>Yes</font><br/> //No is a Red Color  
@@ -101,25 +98,31 @@ NEWTAB(" a. Enemy Forces:")
 • Uniform Pattern(s): EMR (Russian Digital Green Woodland)
 
 <br/><br/>
-/*------------------------ ENEMY - MLCOA ------------------------*/
+/*------------------------ ENEMY - MLCOA ------------------------
+MOST DANGEROUS COURSE OF ACTION
+*/
 <font color='#5BD527' size='16'>Enemy Most Likely Course Of Action:</font><br/>
-<br/>
-//MOST DANGEROUS COURSE OF ACTION
+
+
 
 <br/><br/>
-/*------------------------ ENEMY - MDCOA ------------------------*/
+/*------------------------ ENEMY - MDCOA ------------------------
+MOST DANGEROUS COURSE OF ACTION
+*/
 <font color='#5BD527' size='16'>Enemy Most Dangerous Course Of Action:</font><br/>
-<br/>
-//MOST DANGEROUS COURSE OF ACTION
-ENDTAB;
 
+
+
+ENDTAB;
 /* ------------------------------------------------ 1B. FRIENDLY FORCES TAB ------------------------------------------------ */
 
 NEWTAB(" b. Friendly Forces:")
+/*------------------------ B. FRIENDLY DISPOSITION DISPOSITION ------------------------
+under most circumstances, the 242 is gonna be the disposition, but feel free to make this something else if it is! It adds a lot to your mission if you really fill it out!
+Use METIS MARKERS underlaid with empty markers to get the units placed or use the ORBAT composition
+The dash there is as close to grey as I'm willing to make it, someone else can fuck around with it.
+*/
 <font color='#5BD527' size='16'>Disposition And Strength:</font><br/>
-<br/>
-
-//Player disposition
 242nd Armored Brigade Combat Team 'Nightstalkers'<br/> 
 <font color='#2E2E2E'>-</font color>    - <marker name = '242OrbatA1'>1st Battalion</marker><br/>
 <font color='#2E2E2E'>-</font color>       - HQ Company<br/> 
@@ -184,60 +187,73 @@ ENDTAB;
 /* ------------------------------------------------ 2. MISSION TAB ------------------------------------------------ */
 
 NEWTAB("II. Mission:")
-/*------------------------ MISSION - MISSION ------------------------*/
+/*------------------------ MISSION - MISSION ------------------------
+What just happened and what is the mission?
+*/
 <font color='#5BD527' size='16'>Mission:</font><br/>
-//What just happened and what is the mission?
-ENDTAB;
 
+
+
+ENDTAB;
 /* ------------------------------------------------ 5. EXECUTION TAB ------------------------------------------------ */
 NEWTAB("III. Execution:")
-/*------------------------ EXECUTION - COMMANDERS INTENT ------------------------*/
+/*------------------------ EXECUTION - COMMANDERS INTENT ------------------------
+What does the Commander want to achieve by completing this mission?
+*/
 <font color='#5BD527' size='16'>Command Intent:</font><br/>
-<br/>
-//[What does the Commander want to achieve by completing this mission?]<br/><br/>
-<br/>
-<br/>
-/*------------------------ EXECUTION - Maneuver ------------------------*/
-<font color='#5BD527' size='16'>Maneuver:</font><br/>
-/*
-[How will the Players maneuver through the map?]<br/><br/> 
+
+
+
+<br/><br/>
+/*------------------------ EXECUTION - Maneuver ---------------------------------
+How will the Players maneuver through the map?] 
 Are there any roads and such that they must use or avoid?
 */
-<br/>
-<br/>
+<font color='#5BD527' size='16'>Maneuver:</font><br/>
+
+
+
+<br/><br/>
 /*------------------------ EXECUTION - TIMINGS ------------------------*/
 <font color='#5BD527' size='16'>Timings:</font><br/>
 Mission Time Limit - Mission must be completed by 21:50 - 50 Minutes
 
+
+
 <br/><br/>
-/*------------------------ EXECUTION -TASKS ------------------------*/
-<font color='#5BD527' size='16'>Tasks:</font><br/>
-//[What Tasks do the Players have to complete?]
-• TASK1<br/>  
-• TASK2<br/>
-• TASK3<br/>
-/*
+/*------------------------ EXECUTION -TASKS ------------------------
+List of tasks for the players force to complete to win the mission
 <font color='#61FF33' size='13'>GREEN TEXT FOR FRIENDLY THINGS</font><br/>  
 <font color='#C41D1D' size='13'>RED TEXT FOR ENEMY THINGS</font><br/> 
 */
-ENDTAB;
+<font color='#5BD527' size='16'>Tasks:</font><br/>
+• TASK1<br/>  
+• TASK2<br/>
+• TASK3<br/>
 
+
+
+ENDTAB;
 /* ------------------------------------------------ 6. SERVICE AND SUPPORT TAB------------------------------------- */
 NEWTAB("IV. Service Support:")
 /*------------------------ Service and Support - Artillery ------------------------*/
 <font color='#5BD527' size='16'>Artillery:</font><br/>
 
+
+
 <br/><br/>
 /*------------------------ Service and Support - Aircraft ------------------------*/
 <font color='#5BD527' size='16'>Aircraft:</font><br/>
+
+
 
 <br/><br/>
 /*------------------------ Service and Support - Support ------------------------*/
 <font color='#5BD527' size='16'>Services:</font><br/>
 
+
+
 ENDTAB;
-
-
 /* ------------------------------------------------ 7. SIGNALS TAB ------------------------------------------------ */
 NEWTAB("V. Command & Signal:")
 <font color='#3361FF' size='15'>AN/PRC-343</font><br/>
