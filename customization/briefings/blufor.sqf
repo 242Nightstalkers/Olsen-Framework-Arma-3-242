@@ -66,16 +66,16 @@ The dash there is as close to grey as I'm willing to make it, someone else can f
 */
 <font color='#5BD527' size='16'>Disposition and Activity</font><br/>
 1st Amphibious Combined Arms Brigade<br/>
-<font color='#2E2E2E'>-</font color>    - 34th Mechanized Infantry Battalion<br/>
-<font color='#2E2E2E'>-</font color>       - <marker name = 'OpUnit4'>A Company</marker><br/>
-<font color='#2E2E2E'>-</font color>       - <marker name = 'OpUnit3'>B Company</marker><br/>
-<font color='#2E2E2E'>-</font color>       - C Company<br/>     
-<font color='#2E2E2E'>-</font color>          - <marker name = 'OpUnit1'>4th Platoon</marker><br/>
-<font color='#2E2E2E'>-</font color>          - <marker name = 'OpUnit5'>3rd Platoon</marker><br/>
-<font color='#2E2E2E'>-</font color>       - <marker name = 'OpUnit6'>D Company</marker><br/>
-<font color='#2E2E2E'>-</font color>    - 61st Mobile Artillery Battalion<br/>
-<font color='#2E2E2E'>-</font color>       - E Company<br/>
-<font color='#2E2E2E'>-</font color>          - <marker name = 'OpUnit2'>2nd Platoon</marker>
+<font color='#2E2E2E'> </font color>    - 34th Mechanized Infantry Battalion<br/>
+<font color='#2E2E2E'> </font color>       - <marker name = 'OpUnit4'>A Company</marker><br/>
+<font color='#2E2E2E'> </font color>       - <marker name = 'OpUnit3'>B Company</marker><br/>
+<font color='#2E2E2E'> </font color>       - C Company<br/>     
+<font color='#2E2E2E'> </font color>          - <marker name = 'OpUnit1'>4th Platoon</marker><br/>
+<font color='#2E2E2E'> </font color>          - <marker name = 'OpUnit5'>3rd Platoon</marker><br/>
+<font color='#2E2E2E'> </font color>       - <marker name = 'OpUnit6'>D Company</marker><br/>
+<font color='#2E2E2E'> </font color>    - 61st Mobile Artillery Battalion<br/>
+<font color='#2E2E2E'> </font color>       - E Company<br/>
+<font color='#2E2E2E'> </font color>          - <marker name = 'OpUnit2'>2nd Platoon</marker>
 <br/><br/>
 /*------------------------ ENEMY - EQUIPMENT ------------------------
 Roster of Enemy's Equipment
@@ -124,28 +124,28 @@ The dash there is as close to grey as I'm willing to make it, someone else can f
 */
 <font color='#5BD527' size='16'>Disposition And Strength:</font><br/>
 242nd Armored Brigade Combat Team 'Nightstalkers'<br/> 
-<font color='#2E2E2E'>-</font color>    - <marker name = '242OrbatA1'>1st Battalion</marker><br/>
-<font color='#2E2E2E'>-</font color>       - HQ Company<br/> 
-<font color='#2E2E2E'>-</font color>          - 1st Platoon (Recon.)<br/> 
-<font color='#2E2E2E'>-</font color>            - <marker name = 'BlUnit1'>1st Section</marker><br/>
-<font color='#2E2E2E'>-</font color>            - <marker name = 'BlUnit2'>2nd Section</marker><br/>
-<font color='#2E2E2E'>-</font color>       - A Company (Mech. Inf.)<br/>
-<font color='#2E2E2E'>-</font color>          - <marker name = 'BlUnit3'>1st Platoon</marker><br/>
-<font color='#2E2E2E'>-</font color>          - <marker name = 'BlUnit4'>2nd Platoon</marker><br/>
-<font color='#2E2E2E'>-</font color>       - D Company (Armor)<br/>
-<font color='#2E2E2E'>-</font color>          - <marker name = 'BlUnit5'>1st Platoon</marker><br/>
-<font color='#2E2E2E'>-</font color>          - <marker name = 'BlUnit6'>2nd Platoon</marker><br/> 
-<font color='#2E2E2E'>-</font color> 	- Fires Battalion<br/>
-<font color='#2E2E2E'>-</font color>       - Battery A (Artillery)<br/>
-<font color='#2E2E2E'>-</font color>          - <marker name = 'BlUnit7'>1st Platoon</marker><br/>
-<font color='#2E2E2E'>-</font color>          - <marker name = 'BlUnit8'>2nd Platoon</marker><br/>		 
-<font color='#2E2E2E'>-</font color>       - Battery B (Artillery)<br/>
-<font color='#2E2E2E'>-</font color>          - <marker name = 'BlUnit9'>1st Platoon</marker><br/>
-<font color='#2E2E2E'>-</font color>          - <marker name = 'BlUnit10'>2nd Platoon</marker><br/>	
-<font color='#2E2E2E'>-</font color>       - Battery C (Artillery)<br/>
-<font color='#2E2E2E'>-</font color>          - <marker name = 'BlUnit11'>1st Platoon</marker><br/>
-<font color='#2E2E2E'>-</font color>          - <marker name = 'BlUnit12'>2nd Platoon</marker><br/>		 		 
-<font color='#2E2E2E'>-</font color>       - E Company (Logistics)
+<font color='#2E2E2E'> </font color>    - <marker name = '242OrbatA1'>1st Battalion</marker><br/>
+<font color='#2E2E2E'> </font color>       - HQ Company<br/> 
+<font color='#2E2E2E'> </font color>          - 1st Platoon (Recon.)<br/> 
+<font color='#2E2E2E'> </font color>            - <marker name = 'BlUnit1'>1st Section</marker><br/>
+<font color='#2E2E2E'> </font color>            - <marker name = 'BlUnit2'>2nd Section</marker><br/>
+<font color='#2E2E2E'> </font color>       - A Company (Mech. Inf.)<br/>
+<font color='#2E2E2E'> </font color>          - <marker name = 'BlUnit3'>1st Platoon</marker><br/>
+<font color='#2E2E2E'> </font color>          - <marker name = 'BlUnit4'>2nd Platoon</marker><br/>
+<font color='#2E2E2E'> </font color>       - D Company (Armor)<br/>
+<font color='#2E2E2E'> </font color>          - <marker name = 'BlUnit5'>1st Platoon</marker><br/>
+<font color='#2E2E2E'> </font color>          - <marker name = 'BlUnit6'>2nd Platoon</marker><br/> 
+<font color='#2E2E2E'> </font color> 	- Fires Battalion<br/>
+<font color='#2E2E2E'> </font color>       - Battery A (Artillery)<br/>
+<font color='#2E2E2E'> </font color>          - <marker name = 'BlUnit7'>1st Platoon</marker><br/>
+<font color='#2E2E2E'> </font color>          - <marker name = 'BlUnit8'>2nd Platoon</marker><br/>		 
+<font color='#2E2E2E'> </font color>       - Battery B (Artillery)<br/>
+<font color='#2E2E2E'> </font color>          - <marker name = 'BlUnit9'>1st Platoon</marker><br/>
+<font color='#2E2E2E'> </font color>          - <marker name = 'BlUnit10'>2nd Platoon</marker><br/>	
+<font color='#2E2E2E'> </font color>       - Battery C (Artillery)<br/>
+<font color='#2E2E2E'> </font color>          - <marker name = 'BlUnit11'>1st Platoon</marker><br/>
+<font color='#2E2E2E'> </font color>          - <marker name = 'BlUnit12'>2nd Platoon</marker><br/>		 		 
+<font color='#2E2E2E'> </font color>       - E Company (Logistics)
 <br/>
 <br/>
 /*------------------------ FRIENDLY - Equipment and Appearance ------------------------*/
