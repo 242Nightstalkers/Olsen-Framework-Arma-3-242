@@ -124,27 +124,20 @@ The dash there is as close to grey as I'm willing to make it, someone else can f
 */
 <font color='#5BD527' size='16'>Disposition And Strength:</font><br/>
 242nd Armored Brigade Combat Team 'Nightstalkers'<br/> 
-<font color='#2E2E2E'> </font color>    - <marker name = '242OrbatA1'>1st Battalion</marker><br/>
+<font color='#2E2E2E'> </font color>    - <marker name = '242bat1'>1st Battalion</marker><br/>
 <font color='#2E2E2E'> </font color>       - HQ Company<br/> 
 <font color='#2E2E2E'> </font color>          - 1st Platoon (Recon.)<br/> 
-<font color='#2E2E2E'> </font color>            - <marker name = 'BlUnit1'>1st Section</marker><br/>
-<font color='#2E2E2E'> </font color>            - <marker name = 'BlUnit2'>2nd Section</marker><br/>
+<font color='#2E2E2E'> </font color>            - <marker name = 'Blrec1'>1st Section</marker><br/>
+<font color='#2E2E2E'> </font color>            - <marker name = 'Blrec2'>2nd Section</marker><br/>
 <font color='#2E2E2E'> </font color>       - A Company (Mech. Inf.)<br/>
-<font color='#2E2E2E'> </font color>          - <marker name = 'BlUnit3'>1st Platoon</marker><br/>
-<font color='#2E2E2E'> </font color>          - <marker name = 'BlUnit4'>2nd Platoon</marker><br/>
+<font color='#2E2E2E'> </font color>          - <marker name = 'Blmech2'>1st Platoon</marker><br/>
+<font color='#2E2E2E'> </font color>          - <marker name = 'Blmech2'>2nd Platoon</marker><br/>
 <font color='#2E2E2E'> </font color>       - D Company (Armor)<br/>
-<font color='#2E2E2E'> </font color>          - <marker name = 'BlUnit5'>1st Platoon</marker><br/>
-<font color='#2E2E2E'> </font color>          - <marker name = 'BlUnit6'>2nd Platoon</marker><br/> 
+<font color='#2E2E2E'> </font color>          - <marker name = 'Bltank1'>1st Platoon</marker><br/>
+<font color='#2E2E2E'> </font color>          - <marker name = 'Bltank2'>2nd Platoon</marker><br/> 
 <font color='#2E2E2E'> </font color> 	- Fires Battalion<br/>
 <font color='#2E2E2E'> </font color>       - Battery A (Artillery)<br/>
-<font color='#2E2E2E'> </font color>          - <marker name = 'BlUnit7'>1st Platoon</marker><br/>
-<font color='#2E2E2E'> </font color>          - <marker name = 'BlUnit8'>2nd Platoon</marker><br/>		 
-<font color='#2E2E2E'> </font color>       - Battery B (Artillery)<br/>
-<font color='#2E2E2E'> </font color>          - <marker name = 'BlUnit9'>1st Platoon</marker><br/>
-<font color='#2E2E2E'> </font color>          - <marker name = 'BlUnit10'>2nd Platoon</marker><br/>	
-<font color='#2E2E2E'> </font color>       - Battery C (Artillery)<br/>
-<font color='#2E2E2E'> </font color>          - <marker name = 'BlUnit11'>1st Platoon</marker><br/>
-<font color='#2E2E2E'> </font color>          - <marker name = 'BlUnit12'>2nd Platoon</marker><br/>		 		 
+<font color='#2E2E2E'> </font color>          - <marker name = 'Blarty1'>1st Platoon</marker><br/>	 		 
 <font color='#2E2E2E'> </font color>       - E Company (Logistics)
 <br/>
 <br/>
@@ -160,8 +153,8 @@ The dash there is as close to grey as I'm willing to make it, someone else can f
 • Thermals: <font color='#C41D1D' size='13'>No</font><br/>   
 • IR Lasers: <font color='#61FF33' size='13'>Yes</font><br/>  
 • Suppressors: <font color='#C41D1D' size='13'>No</font><br/>  
-• Optics: M68 CCO/EOTech XPS2 (1x)<br/>  
-• Camo: OCP (Multicam)
+• Optics Strength: 1x-4x (Eotech and CCO) <br/>  
+• Uniform Pattern(s):US Army Ranger Multicam
 <br/>
 
 <font color='#3361FF' size='13'>Weapons:</font><br/>

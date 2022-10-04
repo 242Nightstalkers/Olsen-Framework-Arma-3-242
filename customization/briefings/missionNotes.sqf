@@ -14,9 +14,6 @@ Too Many Casualties Taken (50% of Players)<br/><br/>
 //• Music Volume is recommended to be set to half of 'Effects' volume.<br/>
 • If server fails to set global view distance to 1300m, have an admin do so.<br/>
 //• Task debug information can be found in the task's description.<br/><br/>
-
-ENDTAB;
-
-NEWTAB("Game Mastering") //This is shown for everyone
 This mission is not designed for game mastering and should only be manipulated for technical, administrative or diagnostic purposes.
+
 ENDTAB;
