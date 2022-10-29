@@ -34,7 +34,7 @@ GVAR(ACRE_Enable_Scramble) = true;
 //CHANNEL NAMES
 /////////////
 
-GVAR(ACRE_Enable_Channel_Names) = false;
+GVAR(ACRE_Enable_Channel_Names) = true;
 
 //define custom radio channel names in following array
 //don't change "label" value!

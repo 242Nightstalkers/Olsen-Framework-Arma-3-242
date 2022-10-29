@@ -76,6 +76,7 @@ if (GETMVAR(SpectateBriefing,true)) then {
 		};
 		GVAR(allBriefings) pushBack _tempEntry;
 	};
+    
 };
 
 [{!isNull ace_player},{

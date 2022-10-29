@@ -17,7 +17,11 @@
 *<marker name = 'NAME'>TEXT</marker> //Add clickable marker									*
 *<execute expression = 'CODE'>TEXT</execute> //Execute function hyperlink					*
 *********************************************************************************************/
-
+/*
+#define GREENYES '#61FF33'
+#define GREENHEAD '#5BD527'
+#define REDNO
+*/
 /* ------------------------------------------------ 1. SITUATION TAB ------------------------------------------------ */
 NEWTAB("I. Situation:")
 /*------------------------ SITUATION ------------------------ 
@@ -58,7 +62,7 @@ Also include the max view distance settings
 <br/>View Range at Ground level: 3500 Meters.
 ENDTAB;
 /* ------------------------------------------------ I-A. ENEMY FORCES TAB ------------------------------------------------ */
-NEWTAB("  A. Enemy Forces:")
+NEWTAB("  a. Enemy Forces:")
 /*------------------------ A. ENEMY DISPOSITION ------------------------
 If force composition this high is not known, feel free to make them up and fill in using the template below! It adds a lot to your mission if you really fill it out!
 Use METIS MARKERS underlaid with empty markers to get the units placed.
@@ -75,7 +79,7 @@ The dash there is as close to grey as I'm willing to make it, someone else can f
 <font color='#2E2E2E'> </font color>       - <marker name = 'OpUnit6'>D Company</marker><br/>
 <font color='#2E2E2E'> </font color>    - 61st Mobile Artillery Battalion<br/>
 <font color='#2E2E2E'> </font color>       - E Company<br/>
-<font color='#2E2E2E'> </font color>          - <marker name = 'OpUnit2'>2nd Platoon</marker>
+<font color='#2E2E2E'> </font color>          - <marker name = 'OpUnit2'>2nd Platoon</marker><br/>
 <br/><br/>
 /*------------------------ ENEMY - EQUIPMENT ------------------------
 Roster of Enemy's Equipment
@@ -83,19 +87,25 @@ Roster of Enemy's Equipment
 <font color='#C41D1D' size='13'>No</font><br/> for equipment Enemy does not have
 */
 <font color='#5BD527' size='16'>Equipment and Appearance:</font><br/>
-<font color='#5BD527' size='15'>Details:</font><br/>
-<font color='#3361FF' size='13'>Vehicles:</font><br/>  
-• <font color='#C41D1D' size='14'>GAZ-2330 'Tigr'</font><br/><br/> //Fill it out here by copying until you have all the vehicles  
-<font color='#3361FF' size='13'>Weapons:</font><br/>
-• <font color='#C41D1D' size='14'>AK-74M</font><br/><br/>  //Copy out all the relevant weapons, Rifle, Machinegun
+<font color='#3361FF' size='13'>Vehicles:</font><br/>  //Fill it out here by copying until you have all the vehicles   
+• <font color='#C41D1D' size='14'>GAZ-2330 'Tigr'</font><br/>
 
+<br/><br/>
+<font color='#3361FF' size='13'>Weapons:</font><br/> //Copy out all the relevant weapons, Rifle, Machinegun
+• <font color='#C41D1D' size='14'>AK-74M</font><br/>
+
+<br/><br/> 
 <font color='#3361FF' size='13'>Gear:</font><br/>
 • NVGs: <font color='#61FF33' size='13'>Yes</font><br/> //Yes is a green color 
-• Thermals: <<font color='#61FF33' size='13'>Yes</font><br/> //No is a Red Color  
-• IR Lasers: <font color='#61FF33' size='13'>Yes</font><br/> 
-• Suppressors: <font color='#C41D1D' size='13'>No</font><br/>   
+• Thermals: <font color='#61FF33' size='13'>Yes</font><br/> //No is a Red Color  
+• IR Lasers: <font color='#61FF33' size='13'>Yes</font><br/>
+• Suppressors: <font color='#C41D1D' size='13'>No</font><br/>
+• Artillery: <font color='#61FF33' size='13'>No</font><br/>
+• Cross Unit Communications (QRF call in): <font color='#61FF33' size='13'>Yes</font><br/>        
+• Ground to Air Radar: <font color='#61FF33' size='13'>Yes</font><br/>  
+• Datalinks: <font color='#61FF33' size='13'>Yes</font><br/>
 • Optics Strength: 1x-4x <br/>  
-• Uniform Pattern(s): EMR (Russian Digital Green Woodland)
+• Uniform Pattern(s): EMR (Russian Digital Green Woodland)<br/>
 
 <br/><br/>
 /*------------------------ ENEMY - MLCOA ------------------------
@@ -116,7 +126,7 @@ MOST DANGEROUS COURSE OF ACTION
 ENDTAB;
 /* ------------------------------------------------ 1B. FRIENDLY FORCES TAB ------------------------------------------------ */
 
-NEWTAB(" b. Friendly Forces:")
+NEWTAB("  b. Friendly Forces:")
 /*------------------------ B. FRIENDLY DISPOSITION DISPOSITION ------------------------
 under most circumstances, the 242 is gonna be the disposition, but feel free to make this something else if it is! It adds a lot to your mission if you really fill it out!
 Use METIS MARKERS underlaid with empty markers to get the units placed or use the ORBAT composition
@@ -143,9 +153,8 @@ The dash there is as close to grey as I'm willing to make it, someone else can f
 <br/>
 /*------------------------ FRIENDLY - Equipment and Appearance ------------------------*/
 <font color='#5BD527' size='15'>Equipment and Appearance::</font><br/>
-[Structure and Size of friendly units]<br/><br/>
 
-<font color='#5BD527' size='15'>Details:</font><br/>
+<font color='#3361FF' size='13'>Vehicles:</font><br/>
 2x <font color='#3361FF' size='14'>AMV-7 'Marshall'</font><br/><br/>  
   
 <font color='#3361FF' size='13'>Gear:</font><br/>
@@ -209,7 +218,7 @@ Are there any roads and such that they must use or avoid?
 <br/><br/>
 /*------------------------ EXECUTION - TIMINGS ------------------------*/
 <font color='#5BD527' size='16'>Timings:</font><br/>
-Mission Time Limit - Mission must be completed by 21:50 - 50 Minutes
+Mission Time Limit - Mission must be completed NLT 21:50 (50 Minutes)
 
 
 
@@ -269,3 +278,9 @@ NEWTAB("V. Command & Signal:")
 • Channel 2 - 1st Platoon Command<br/>
 • Channel 3 - 1st Platoon Vehicles<br/>
 ENDTAB;
+/*
+#ifdef GREENYES
+	#undef GREENYES
+#endif
+
+*/
