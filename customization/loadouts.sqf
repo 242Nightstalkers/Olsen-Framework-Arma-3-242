@@ -2,4 +2,8 @@
 // Example:
 // [this, "USMCRiflePlatoon_SL"] call FW_fnc_GearScript;
 
+//#include "loadouts\1989VDV.sqf"
+//#include "loadouts\2000MSV.sqf"
+//#include "loadouts\BAF.sqf"
+//#include "loadouts\RURiflePlatoon.sqf"
 //#include "loadouts\USMCRiflePlatoon.sqf"
