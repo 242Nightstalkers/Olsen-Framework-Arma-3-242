@@ -154,6 +154,19 @@ TRACE_1("",GVAR(CommanderAreas));
 //exit clients
 AI_EXEC_CHECK(HC);
 
+GVAR(bluforEnemies) = [opfor, independent] select {
+    [blufor, _x] call BIS_fnc_sideIsEnemy
+};
+GVAR(opforEnemies) = [blufor, independent] select {
+    [opfor, _x] call BIS_fnc_sideIsEnemy
+};
+GVAR(indforEnemies) = [blufor, opfor] select {
+    [independent, _x] call BIS_fnc_sideIsEnemy
+};
+
+private _acreRadios = [] call ACRE_api_fnc_getallradios;
+GVAR(acreRadiosArray) = (_acreRadios select 0) + (_acreRadios select 1);
+
 [QGVAR(HCReceiveArrayDataEvent), {
     LOG_1("Received Array Data: %1",_this);
     GVAR(zoneEntities) = createHashMap;
