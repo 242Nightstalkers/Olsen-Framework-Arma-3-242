@@ -4,7 +4,22 @@ selectVehicles[] = {};
 
 // Array containing vehicle classnames that will have option to spawn AI driver in them
 // Example: VehicleClasses[] = {"Wheeled_APC_F"};
-VehicleClasses[] = {};
+//
+
+
+VehicleClasses[] = {
+    "B_APC_Wheeled_01_cannon_F", 
+    "APC_Wheeled_01_atgm_base_lxWS", 
+    "APC_Wheeled_01_command_base_lxWS", 
+    "NS_Marshall_AR2", 
+    "B_D_APC_Wheeled_01_cannon_lxWS", 
+    "B_D_APC_Wheeled_01_atgm_lxWS", 
+    "B_D_APC_Wheeled_01_command_lxWS", 
+    "B_T_APC_Wheeled_01_atgm_lxWS", 
+    "B_T_APC_Wheeled_01_command_lxWS", 
+    "B_T_APC_Wheeled_01_cannon_F", 
+    "NS_Marshall_NoZoom"
+};
 
 // Use settings below to enable the module for all tracked vehicles, boats, etc in the mission
 AllTanks = false;

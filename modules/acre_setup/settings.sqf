@@ -34,47 +34,47 @@ GVAR(ACRE_Enable_Scramble) = true;
 //CHANNEL NAMES
 /////////////
 
-GVAR(ACRE_Enable_Channel_Names) = false;
+GVAR(ACRE_Enable_Channel_Names) = true;
 
 //define custom radio channel names in following array
 //don't change "label" value!
 
 GVAR(ACRE_ChannelNames) = [
 	[//WEST - USE SIDE SETTINGS ONLY IF SCRAMBLE IS ON
-		[1, "label", "PLTNET 1"],
-		[2, "label", "PLTNET 2"],
-		[3, "label", "PLTNET 3"],
-		[4, "label", "PLTNET 4"],
-		[5, "label", "COY"],
+		[1, "label", "A COY 1"],
+		[2, "label", "1 PLT COM"],
+		[3, "label", "1 PLT CNV "],
+		[4, "label", "2 PLT COM"],
+		[5, "label", "2 PLT CNV"],
 		[6, "label", "CAS"],
-		[7, "label", "FIRES"]
+		[7, "label", "AIR"]
 	],
 	[//EAST
-		[1, "label", "PLTNET 1"],
-		[2, "label", "PLTNET 2"],
-		[3, "label", "PLTNET 3"],
-		[4, "label", "PLTNET 4"],
-		[5, "label", "COY"],
+		[1, "label", "A COY 1"],
+		[2, "label", "1 PLT COM"],
+		[3, "label", "1 PLT CNV "],
+		[4, "label", "2 PLT COM"],
+		[5, "label", "2 PLT CNV"],
 		[6, "label", "CAS"],
-		[7, "label", "FIRES"]
+		[7, "label", "AIR"]
 	],
 	[//INDEPENDENT
-		[1, "label", "PLTNET 1"],
-		[2, "label", "PLTNET 2"],
-		[3, "label", "PLTNET 3"],
-		[4, "label", "PLTNET 4"],
-		[5, "label", "COY"],
+		[1, "label", "A COY 1"],
+		[2, "label", "1 PLT COM"],
+		[3, "label", "1 PLT CNV "],
+		[4, "label", "2 PLT COM"],
+		[5, "label", "2 PLT CNV"],
 		[6, "label", "CAS"],
-		[7, "label", "FIRES"]
+		[7, "label", "AIR"]
 	],
 	[//DEFAULT - USE THIS IF SCRAMBLE IS OFF
-		[1, "label", "PLTNET 1"],
-		[2, "label", "PLTNET 2"],
-		[3, "label", "PLTNET 3"],
-		[4, "label", "PLTNET 4"],
-		[5, "label", "COY"],
+		[1, "label", "A COY 1"],
+		[2, "label", "1 PLT COM"],
+		[3, "label", "1 PLT CNV "],
+		[4, "label", "2 PLT COM"],
+		[5, "label", "2 PLT CNV"],
 		[6, "label", "CAS"],
-		[7, "label", "FIRES"]
+		[7, "label", "AIR"]
 	]
 ];
 
@@ -216,7 +216,6 @@ GVAR(ACRE_ORRList) = [
 /*
   Direct speech slider
   ACRE2 has a built in direct speech slider allowing you to determine how far your voice in direct speech should travel. The system has five states and by default starts in the middle state. The below table contains an approximated table with empirical testing by Bullhorn.
-
   Volume state  |  Loud (m)  |  Quiet (m)  |  Barely audible (m)
   -2			|  1		 |  2		  |  13
   -1			|  3		 |  15		 |  55
