@@ -34,47 +34,47 @@ GVAR(ACRE_Enable_Scramble) = true;
 //CHANNEL NAMES
 /////////////
 
-GVAR(ACRE_Enable_Channel_Names) = true;
+GVAR(ACRE_Enable_Channel_Names) = false;
 
 //define custom radio channel names in following array
 //don't change "label" value!
 
 GVAR(ACRE_ChannelNames) = [
 	[//WEST - USE SIDE SETTINGS ONLY IF SCRAMBLE IS ON
-		[1, "label", "A COY 1"],
-		[2, "label", "1 PLT COM"],
-		[3, "label", "1 PLT CNV "],
-		[4, "label", "2 PLT COM"],
-		[5, "label", "2 PLT CNV"],
+		[1, "label", "PLTNET 1"],
+		[2, "label", "PLTNET 2"],
+		[3, "label", "PLTNET 3"],
+		[4, "label", "PLTNET 4"],
+		[5, "label", "COY"],
 		[6, "label", "CAS"],
-		[7, "label", "AIR"]
+		[7, "label", "FIRES"]
 	],
 	[//EAST
-		[1, "label", "A COY 1"],
-		[2, "label", "1 PLT COM"],
-		[3, "label", "1 PLT CNV "],
-		[4, "label", "2 PLT COM"],
-		[5, "label", "2 PLT CNV"],
+		[1, "label", "PLTNET 1"],
+		[2, "label", "PLTNET 2"],
+		[3, "label", "PLTNET 3"],
+		[4, "label", "PLTNET 4"],
+		[5, "label", "COY"],
 		[6, "label", "CAS"],
-		[7, "label", "AIR"]
+		[7, "label", "FIRES"]
 	],
 	[//INDEPENDENT
-		[1, "label", "A COY 1"],
-		[2, "label", "1 PLT COM"],
-		[3, "label", "1 PLT CNV "],
-		[4, "label", "2 PLT COM"],
-		[5, "label", "2 PLT CNV"],
+		[1, "label", "PLTNET 1"],
+		[2, "label", "PLTNET 2"],
+		[3, "label", "PLTNET 3"],
+		[4, "label", "PLTNET 4"],
+		[5, "label", "COY"],
 		[6, "label", "CAS"],
-		[7, "label", "AIR"]
+		[7, "label", "FIRES"]
 	],
 	[//DEFAULT - USE THIS IF SCRAMBLE IS OFF
-		[1, "label", "A COY 1"],
-		[2, "label", "1 PLT COM"],
-		[3, "label", "1 PLT CNV "],
-		[4, "label", "2 PLT COM"],
-		[5, "label", "2 PLT CNV"],
+		[1, "label", "PLTNET 1"],
+		[2, "label", "PLTNET 2"],
+		[3, "label", "PLTNET 3"],
+		[4, "label", "PLTNET 4"],
+		[5, "label", "COY"],
 		[6, "label", "CAS"],
-		[7, "label", "AIR"]
+		[7, "label", "FIRES"]
 	]
 ];
 
