@@ -10,9 +10,11 @@ Enabled modules by default, disable them by adding // in front.
 #include "acre_setup\root.sqf"
 #include "ai_drivers\root.sqf"
 #include "anti_nd\root.sqf"
+//#include "cover_map\root.sqf"
 #include "jip\root.sqf"
 #include "self_actions\root.sqf"
 #include "weapon_helper\root.sqf"
+#include "headless_ai\root.sqf"
 
 /*
 Additional modules that can be enabled by removing the //
@@ -34,7 +36,7 @@ Additional modules that can be enabled by removing the //
 //#include "call_mission\root.sqf"
 //#include "capture_zone\root.sqf"
 //#include "clicker\root.sqf"
-//#include "cover_map\root.sqf"
+
 //#include "cTab_settings\root.sqf"
 //#include "currency\root.sqf"
 //#include "cvc_check\root.sqf"
@@ -45,7 +47,7 @@ Additional modules that can be enabled by removing the //
 //#include "firemission_virtual\root.sqf"
 //#include "gas\root.sqf"
 //#include "grad-fortifications\root.sqf"
-#include "headless_ai\root.sqf"
+
 //#include "headless_spawn\root.sqf"
 //#include "hostage\root.sqf"
 //#include "in_game_brief\root.sqf"

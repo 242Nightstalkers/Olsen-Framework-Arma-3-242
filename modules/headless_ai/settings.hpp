@@ -7,7 +7,7 @@ of reinforcements or subsequent AOs.
 
 // Array objects
 // eg: ["mainEnemy", "patrol_1", "patrol_2", "patrol_3"]
-arrayObjects[] = {"hc1", "hc2", "hc3"};
+arrayObjects[] = {};
 
 // Initial spawns are spawned upon init, at the start of the mission.
 // eg: ["mainEnemy"]
@@ -83,7 +83,7 @@ rainImpact = true;
 // How much should rain impact the accuracy of AI? Default = 3. Default formula is -> _WeatherCheck = (rain)/3; "rain" is on a scale from 0 to 1. 1 Being very intense rain.
 rainPercent = 3;
 // Should AI have an additional layer of suppression that decreases aiming when suppressed?
-suppression = false;
+suppression = true;
 // How much should suppression impact AI aiming? Default is 5. Normal ArmA is 1.
 suppressionVar = 5;
 // Should AI be impacted by adrenaline? This provides AI with a small speed boost to animations to assist with cover seeking and positioning for a short time.
