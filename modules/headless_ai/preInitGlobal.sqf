@@ -4,12 +4,23 @@ LOG("HC Global Pre Init");
 
 GVAR(ArrayObjects) = [missionConfigFile >> QGVAR(settings) >> "arrayObjects", "array", []] call CBA_fnc_getConfigEntry;
 GVAR(InitialSpawn) = [missionConfigFile >> QGVAR(settings) >> "initialSpawn", "array", []] call CBA_fnc_getConfigEntry;
+GVAR(InitialRandomSpawns) = [missionConfigFile >> QGVAR(settings) >> "initialRandomSpawns", "array", []] call CBA_fnc_getConfigEntry;
 GVAR(InitialRandomSpawnsCount) = [missionConfigFile >> QGVAR(settings) >> "initialRandomSpawnsCount", "number", 0] call CBA_fnc_getConfigEntry;
 
-GVAR(debug) = ([missionConfigFile >> QGVAR(settings) >> "debug", "number", 1] call CBA_fnc_getConfigEntry) == 1;
-GVAR(verboseDebug) = ([missionConfigFile >> QGVAR(settings) >> "verboseDebug", "number", 1] call CBA_fnc_getConfigEntry) == 1;
-GVAR(groupDebug) = ([missionConfigFile >> QGVAR(settings) >> "groupDebug", "number", 1] call CBA_fnc_getConfigEntry) == 1;
-GVAR(useMarkers) = ([missionConfigFile >> QGVAR(settings) >> "useMarkers", "number", 1] call CBA_fnc_getConfigEntry) == 1;
+if (
+    isMultiplayer &&
+    {(toLower serverName) find "main" isNotEqualTo -1}
+) then {
+    GVAR(debug) = false;
+    GVAR(verboseDebug) = false;
+    GVAR(groupDebug) = false;
+    GVAR(useMarkers) = false;
+} else {
+    GVAR(debug) = ([missionConfigFile >> QGVAR(settings) >> "debug", "number", 1] call CBA_fnc_getConfigEntry) == 1;
+    GVAR(verboseDebug) = ([missionConfigFile >> QGVAR(settings) >> "verboseDebug", "number", 1] call CBA_fnc_getConfigEntry) == 1;
+    GVAR(groupDebug) = ([missionConfigFile >> QGVAR(settings) >> "groupDebug", "number", 1] call CBA_fnc_getConfigEntry) == 1;
+    GVAR(useMarkers) = ([missionConfigFile >> QGVAR(settings) >> "useMarkers", "number", 1] call CBA_fnc_getConfigEntry) == 1;
+};
 
 GVAR(AIViewDistance) = [missionConfigFile >> QGVAR(settings) >> "AIViewDistance", "number", 2500] call CBA_fnc_getConfigEntry;
 GVAR(AITerrainDetail) = [missionConfigFile >> QGVAR(settings) >> "AIViewDistance", "number", 3.125] call CBA_fnc_getConfigEntry;

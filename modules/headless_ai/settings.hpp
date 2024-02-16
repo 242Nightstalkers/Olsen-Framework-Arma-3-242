@@ -7,7 +7,7 @@ of reinforcements or subsequent AOs.
 
 // Array objects
 // eg: ["mainEnemy", "patrol_1", "patrol_2", "patrol_3"]
-arrayObjects[] = {};
+arrayObjects[] = {"hc_1", "hc_2", "hc_3", "hc_4", "hc_5"};
 
 // Initial spawns are spawned upon init, at the start of the mission.
 // eg: ["mainEnemy"]
@@ -31,14 +31,17 @@ useMarkers = true;
 AIViewDistance = 2500;
 // value between 3.125 and 50, the lower the more terrain detail
 AITerrainDetail = 3.125;
-// Forces Time on the HC to simulate better AI at night [HOUR,MINUTE]
-forceTimeEnable = true;
+/* Forces Time on the HC to simulate better AI at night [HOUR,MINUTE]
+This setting should only be used to either increase AI sighting ability at night or to make the AI slower to detect in the day time
+There is no need to enable this setting if you are in the day time and want the AI to react as if it is the day time, likewise if it is night and you want the typical
+night behaviour. forceTime is the time in hour, then minute. */
+forceTimeEnable = false;
 forceTime[] = {12,00};
 
 // AI system options
 feature = true;
 enemyUpdateFrequency = 5;
-stateMachineFrames = 2;
+stateMachineFrames = 1;
 //attempts to find a better safe area for a vehicle to spawn in. Should only be used when neccessary.
 saferVehSpawning = false;
 
@@ -83,7 +86,7 @@ rainImpact = true;
 // How much should rain impact the accuracy of AI? Default = 3. Default formula is -> _WeatherCheck = (rain)/3; "rain" is on a scale from 0 to 1. 1 Being very intense rain.
 rainPercent = 3;
 // Should AI have an additional layer of suppression that decreases aiming when suppressed?
-suppression = true;
+suppression = false;
 // How much should suppression impact AI aiming? Default is 5. Normal ArmA is 1.
 suppressionVar = 5;
 // Should AI be impacted by adrenaline? This provides AI with a small speed boost to animations to assist with cover seeking and positioning for a short time.

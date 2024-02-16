@@ -8,11 +8,11 @@ GVAR(ACRE_Enable_Scramble) = true;
 //Function below is to switch one unit to different scramble side.
 
 /*
- * FW_fnc_ACRES_SetScramble
+ * ACRES_fnc_SetScramble
  * Change unit's scramble so it matches set faction
  *
  * Example:
- * [this, east] call FW_fnc_ACRES_SetScramble;
+ * [this, east] call ACRES_fnc_SetScramble;
  * Will set unit's radio to east's scramble setting.
  * (if following example is used on west unit, that unit will hear east units on radio, but won't hear west)
 */
@@ -22,12 +22,12 @@ GVAR(ACRE_Enable_Scramble) = true;
 /////////////////
 
 /*
- * FW_fnc_ACRES_SetRadio
+ * ACRES_fnc_SetRadio
  * use this in player init to set default radio channel and spatial (optional)
  *
  * Examples:
- * [this, "ACRE_PRC343", 2] call FW_fnc_ACRES_SetRadio;
- * [this, "ACRE_PRC117F", 7, "LEFT"] call FW_fnc_ACRES_SetRadio;
+ * [this, "ACRE_PRC343", 2] call ACRES_fnc_SetRadio;
+ * [this, "ACRE_PRC117F", 7, "LEFT"] call ACRES_fnc_SetRadio;
 */
 
 /////////////
@@ -77,7 +77,6 @@ GVAR(ACRE_ChannelNames) = [
 		[7, "label", "AIR"]
 	]
 ];
-
 //////////////
 //BABEL
 //////////////
@@ -85,14 +84,14 @@ GVAR(ACRE_ChannelNames) = [
 GVAR(ACRE_Enable_Babel) = false;
 
 /*
- * FW_fnc_ACRES_SetLanguages
+ * ACRES_fnc_SetLanguages
  *
  * Use this function in player's init to set player's custom languages (translator for example)
  * faction setting will be overwritten by this value
  *
  * Examples:
- * [this, ["ru"]] call FW_fnc_ACRES_SetLanguages;
- * [this, ["fr", "en", "ru"]] call FW_fnc_ACRES_SetLanguages;
+ * [this, ["ru"]] call ACRES_fnc_SetLanguages;
+ * [this, ["fr", "en", "ru"]] call ACRES_fnc_SetLanguages;
 */
 
 //define all available languages here
@@ -216,6 +215,7 @@ GVAR(ACRE_ORRList) = [
 /*
   Direct speech slider
   ACRE2 has a built in direct speech slider allowing you to determine how far your voice in direct speech should travel. The system has five states and by default starts in the middle state. The below table contains an approximated table with empirical testing by Bullhorn.
+
   Volume state  |  Loud (m)  |  Quiet (m)  |  Barely audible (m)
   -2			|  1		 |  2		  |  13
   -1			|  3		 |  15		 |  55

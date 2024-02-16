@@ -4,10 +4,7 @@ selectVehicles[] = {};
 
 // Array containing vehicle classnames that will have option to spawn AI driver in them
 // Example: VehicleClasses[] = {"Wheeled_APC_F"};
-//
-
-
-VehicleClasses[] = {
+VehicleClasses[] = {    
     "B_APC_Wheeled_01_cannon_F", 
     "APC_Wheeled_01_atgm_base_lxWS", 
     "APC_Wheeled_01_command_base_lxWS", 
@@ -46,7 +43,7 @@ target dir pos will determine the angle of the camera in the driver view
 there is a driver view preview display as well as an AI driver that will spawn in so you can adjust around their model
 the view position doesn't need to be exactly where the driver is, up to the mission maker
 */
-TestMode = true;
+TestMode = false;
 
 // customized class config for AI driver view params
 class AIViewParams {

@@ -5,8 +5,4 @@ params ["_unit"];
 
 if !(local _unit) exitWith {};
 
-//LOG("Spawned_Event called past local check");
-
 [QGVAR(spawnedEvent), [_unit]] call CBA_fnc_serverEvent;
-
-

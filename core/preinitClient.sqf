@@ -3,7 +3,16 @@
 #define preInitClient
 
 // Debug settings
-GVAR(debugMessagesEnabled) = ([missionConfigFile >> QGVAR(debugSettings) >> "debugMessagesEnabled", "number", 1] call CBA_fnc_getConfigEntry) == 1;
+if (
+    isMultiplayer &&
+    {(toLower serverName) find "main" isNotEqualTo -1}
+) then {
+    GVAR(debugMessagesEnabled) = false;
+} else {
+    GVAR(debugMessagesEnabled) = ([missionConfigFile >> QGVAR(debugSettings) >> "debugMessagesEnabled", "number", 1] call CBA_fnc_getConfigEntry) == 1;
+};
+
+GVAR(DiaryRecords) = [];
 
 // Start on Safe settings
 GVAR(StartOnSafe) = ([missionConfigFile >> QGVAR(clientSettings) >> "StartOnSafe" >> "enabled", "number", 1] call CBA_fnc_getConfigEntry) == 1;
@@ -110,7 +119,6 @@ FUNC(killcam_toggleFnc) = {
 
 FUNC(eg_keyHandler) = {
     params ["_control", "_code", "_shift", "_control", "_alt"];
-
     private _acre = ["ACRE2", "HeadSet"] call CBA_fnc_getKeybind;
     if !(isNil "_acre") then {
         private _action = _acre select 4;
@@ -119,7 +127,6 @@ FUNC(eg_keyHandler) = {
             call _action;
         };
     };
-
     if (_code == 35 && {!_shift} && {_control} && {!_alt}) then {
         if !(GETMVAR(eg_keyHandler_display_hidden,false)) then {
             (findDisplay 60492) closedisplay 1;
@@ -130,13 +137,11 @@ FUNC(eg_keyHandler) = {
 
 FUNC(eg_keyHandler2) = {
     params ["_control", "_code", "_shift", "_control", "_alt"];
-
     if (_code == 35 && {!_shift} && {_control} && {!_alt} &&
     {GETMVAR(eg_keyHandler_display_hidden,false)}
     ) then {
         ([] call BIS_fnc_displayMission) createDisplay "RscDisplayEGSpectator";
         SETMVAR(eg_keyHandler_display_hidden,false);
-
         GVAR(eg_keyHandle) = (findDisplay 60492) displayAddEventHandler ["keyDown", {call FUNC(eg_keyHandler);}];
         if (GETMVAR(killcam_active,false)) then {
             GVAR(killcam_keyHandle) = (findDisplay 60492) displayAddEventHandler ["keyDown", {call FUNC(killcam_toggleFnc);}];
@@ -145,17 +150,18 @@ FUNC(eg_keyHandler2) = {
 };
 
 [QGVAR(eventPlayerRespawned), {
-
     QGVAR(respawnBlackScreen) cutText ["\n","BLACK IN", 5];
 	[QGVAR(death), 0, false] call ace_common_fnc_setHearingCapability;
 	0 fadeSound 1;
-
 	private _loadout = (player getVariable [QGVAR(Loadout), ""]);
-
 	if (_loadout isNotEqualTo "") then {
 		[player, _loadout] call FUNC(GearScript);
-	};
-
+	} else {
+        _loadout = GETMVAR(initialLoadout,[]);
+        if (_loadout isNotEqualTo []) then {
+            player setUnitLoadout _loadout;
+        };
+    };
     private _customRespawn = missionNamespace getVariable [QGVAR(CustomRespawnPoint), [0,0,0]];
     if (_customRespawn isNotEqualTo [0,0,0]) then {
         player setPosATL _customRespawn;
@@ -164,17 +170,16 @@ FUNC(eg_keyHandler2) = {
             case west: {"fw_west_respawn"};
             case east: {"fw_east_respawn"};
             case independent: {"fw_ind_respawn"};
-            case civilian: {"fw_civ_respawn"};
-            default {""};
+            default {"fw_civ_respawn"};
         };
     	private _respawnPoint = missionNamespace getVariable [_respawnName, objNull];
         if (_respawnPoint isNotEqualTo objnull) then {
     		player setPosATL getPosATL _respawnPoint;
     	} else {
+            ERROR_MSG_1("respawn marker not found for side!",_respawnName);
             player setPosATL (GETMVAR(spawnPos,[ARR_3(0,0,0)]));
         };
     };
-
     player setVariable [QGVAR(Body), player, true];
     player setVariable [QGVAR(HasDied), false, true];
     player setVariable [QGVAR(Dead), false, true];
@@ -274,6 +279,13 @@ FUNC(eg_keyHandler2) = {
             }, _message, 1] call CBA_fnc_waitAndExecute;
             [QGVAR(eventPlayerRespawned)] call CBA_fnc_localEvent;
         };
+        case "MANUAL_BYPASS": {
+            private _message = "You have been respawned manually or through a triggered event. No tickets have been used.";
+            [{
+                [_this, true, 5, 100] call ace_common_fnc_displayText
+            }, _message, 1] call CBA_fnc_waitAndExecute;
+            [QGVAR(eventPlayerRespawned)] call CBA_fnc_localEvent;
+        };
     };
 }] call CBA_fnc_addEventHandler;
 
@@ -284,6 +296,82 @@ GVAR(CheckingCoC) = false;
     TRACE_2("client response for CO",_co,_var);
     missionNamespace setVariable [_var, _co];
     GVAR(CheckingCoC) = false;
+}] call CBA_fnc_addEventHandler;
+
+[QGVAR(increaseRespawnTickets), {
+    params [
+        ["_ticketsChange", 0, [0]]
+    ];
+    if (_ticketsChange isEqualTo 0) exitWith {
+        ERROR_1("Individual ticket change invalid, cannot change by 0",_ticketsChange);
+    };
+    private _currentTickets = GETMVAR(RespawnTickets,0);
+    TRACE_1("tickets changed original",_currentTickets);
+    TRACE_1("tickets changed",_ticketsChange);
+    private _ticketsNew = _currentTickets + _ticketsChange;
+    SETMVAR(RespawnTickets,_ticketsNew);
+    TRACE_1("tickets changed new",_ticketsNew);
+}] call CBA_fnc_addEventHandler;
+
+[QGVAR(triggeredRespawn), {
+    params [
+        ["_side", sideEmpty, [sideEmpty]],
+        ["_condition", {true}, [{}]],
+        ["_bypassTeamTickets", false, [false]],
+        ["_newIndividualTickets", 0, [0]]
+    ];
+    if (
+        (_side isEqualTo sideEmpty ||
+        {playerSide isEqualTo _side}) &&
+        {GETPLVAR(spectating,false)} &&
+        {_condition}
+    ) then {
+        if (
+            _newIndividualTickets isEqualTo -1 ||
+            (_newIndividualTickets > 0 &&
+            {_newIndividualTickets > GVAR(RespawnTickets)})
+        ) then {
+            TRACE_2("Setting new individual ticket value",(GVAR(RespawnTickets)),_newIndividualTickets);
+            GVAR(RespawnTickets) = _newIndividualTickets;
+        };
+        [_bypassTeamTickets] call FUNC(endSpectator);
+    };
+}] call CBA_fnc_addEventHandler;
+
+[QGVAR(TimelimitClient), {
+    params [
+        ["_command", "check", [""]],
+        ["_arg", 0, [0, ""]]
+    ];
+    switch (_command) do {
+        case "check": {
+            private _timeLeft = _arg - (CBA_missionTime / 60);
+            private _text = format ["TimeLimit: %1 Time Remaining: %2 minutes", _arg, _timeLeft];
+            [_text, 1.5, ACE_Player, 10] call ace_common_fnc_displayTextStructured;
+        };
+        case "extend": {
+            private _timeLeft = _arg - (CBA_missionTime / 60);
+            private _text = format ["TimeLimit set to: %1 Time Remaining: %2 minutes", _arg, _timeLeft];
+            [_text, 1.5, ACE_Player, 10] call ace_common_fnc_displayTextStructured;
+        };
+        case "message": {
+            private _text = format ["TimeLimit message set to: %1", _arg];
+            [_text, 1.5, ACE_Player, 10] call ace_common_fnc_displayTextStructured;
+        };
+        default {};
+    };
+}] call CBA_fnc_addEventHandler;
+
+[QGVAR(TestModeNotification), {
+    params [
+        ["_mode", false, [false]],
+        ["_name", "", [""]]
+    ];
+    private _text = [
+        format ["Test Mode disabled by: %1", _name],
+        format ["Test Mode enabled by: %1", _name]
+    ] select _mode;
+    [_text, 1.5, ACE_Player, 10] call ace_common_fnc_displayTextStructured;
 }] call CBA_fnc_addEventHandler;
 
 #include "..\customization\inits\PreInitClient.sqf" //DO NOT REMOVE
