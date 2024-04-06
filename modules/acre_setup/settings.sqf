@@ -41,7 +41,7 @@ GVAR(ACRE_Enable_Channel_Names) = true;
 
 GVAR(ACRE_ChannelNames) = [
 	[//WEST - USE SIDE SETTINGS ONLY IF SCRAMBLE IS ON
-		[1, "label", "A COY 1"],
+		[1, "label", "A CO 1"],
 		[2, "label", "1 PLT COM"],
 		[3, "label", "1 PLT CNV "],
 		[4, "label", "2 PLT COM"],
@@ -50,7 +50,7 @@ GVAR(ACRE_ChannelNames) = [
 		[7, "label", "AIR"]
 	],
 	[//EAST
-		[1, "label", "A COY 1"],
+		[1, "label", "A CO 1"],
 		[2, "label", "1 PLT COM"],
 		[3, "label", "1 PLT CNV "],
 		[4, "label", "2 PLT COM"],
@@ -68,7 +68,7 @@ GVAR(ACRE_ChannelNames) = [
 		[7, "label", "AIR"]
 	],
 	[//DEFAULT - USE THIS IF SCRAMBLE IS OFF
-		[1, "label", "A COY 1"],
+		[1, "label", "A CO 1"],
 		[2, "label", "1 PLT COM"],
 		[3, "label", "1 PLT CNV "],
 		[4, "label", "2 PLT COM"],
