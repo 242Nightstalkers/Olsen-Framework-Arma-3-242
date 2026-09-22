@@ -8,20 +8,16 @@ params [
     ["_behaviour", "UNCHANGED", [""]],
     ["_combat", "NO CHANGE", [""]],
     ["_speed", "UNCHANGED", [""]],
-    ["_formation", "NO CHANGE", [""]],
-    ["_Type","MOVE",[""]],
-    ["_oncomplete",QUOTE(this call FUNC(taskSearchNearby)),[""]],
-    ["_compradius",50,[0]],
-    ["_wpcount",10,[0]]
+    ["_formation", "NO CHANGE", [""]]
 ];
 
 SETVAR(_group,Task,"ATTACK");
 [_group] call FUNC(taskRelease);
 
-LOG_1("taskAssault started _this: %1",_this);
+LOG_1("taskAttack started _this: %1",_this);
 _group = _group call CBA_fnc_getGroup;
 if !(local _group) exitWith {}; // Don't create waypoints on each machine
 
 _attackPos = _attackPos call CBA_fnc_getPos;
 
-[_group, _attackPos] call FUNC(combatAttack);
+[_group, _attackPos, _radius] call FUNC(combatAttack);

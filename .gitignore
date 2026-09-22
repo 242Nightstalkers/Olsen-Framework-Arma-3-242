@@ -58,3 +58,6 @@ release/*
 # Arma
 *.pbo
 texHeaders.bin
+
+.vscode/
+.vs/

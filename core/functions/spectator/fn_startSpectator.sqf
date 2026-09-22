@@ -5,9 +5,8 @@ if (GETPLVAR(Spectating,false)) exitWith {};
 SETPLPVAR(Dead,true); //Tells the framework the player is dead
 SETPLPVAR(Spectating,true); //Player is now spectating
 SETMVAR(Spectating,true); //set local global var to spectating
-
-[(player), true] remoteExecCall ["hideObject", 0];
-[(player), true] remoteExecCall ["hideObjectGlobal", 2];
+[player, true] remoteExecCall ["hideObject", 0];
+[player, true] remoteExecCall ["hideObjectGlobal", 2];
 
 [player] call FUNC(freezeUnit);
 
@@ -67,12 +66,9 @@ private _specGroup = switch _side do {
 //If babel is enabled, allowed spectator to hear all languages present in mission.
 if (GETMVAR(ACRE_Enable_Babel,false)) then {
     private _missionLanguages = [];
-    GVAR(ACRE_Languages_Babel) apply {
-        _x apply {
-            if (!(_x in _missionLanguages)) then {
-                _missionLanguages pushback _x;
-            };
-        };
+    GVAR(ACRE_All_Languages) apply {
+        _x params ["_short", "_long"];
+        _missionLanguages pushBackUnique _short;
     };
     _missionLanguages call acre_api_fnc_babelSetSpokenLanguages;
 };

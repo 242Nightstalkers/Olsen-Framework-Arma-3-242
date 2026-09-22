@@ -13,7 +13,7 @@ class COMPONENT {
 		class OnSEAimed {};
 		class OnSETimeOutReset {};
 		class OnSEBurstReset {};
-		class CondBurstCount {};
+		class CondBurstCount {}; //TODO: rename to proper format
 	};
 
     class CachingSM {
@@ -26,29 +26,30 @@ class COMPONENT {
 	class Combat {
 		file = "modules\headless_ai\functions\Combat";
 		class ArmEmptyStatic {};
+		class combatAmbientFire {};
 		class CombatAttack {};
-		class CombatAssault {};
 		class CombatAssaultVehicle {};
+		class CombatBound {};
+		class CombatCover {};
+		class CombatCoverVehicle {};
 		class CombatDefend {};
 		class CombatDropOff {};
+        class CombatGarrison {};
 		class CombatLand {};
 		class CombatMode {};
+		class CombatHunt {};
 		class CombatMoveTo {};
 		class CombatResponse {};
 		class DefaultGroupPatrol {};
 		class DestroyBuilding {};
 		class FindCoverPos {};
+        class FireAT {};
 		class FireUGL {};
 		class FlankManeuver {};
 		class FocusedAccuracy {};
 		class ForceHeal {};
 		class FormationChange {};
 		class FragmentMove {};
-		class Garrison {};
-		class GarrisonClear {};
-		class GarrisonClearPatrol {};
-		class GroupLoiter {};
-		class GroupPatrol {};
 		class LightGarrison {};
 		class LoiterAction {};
 		class MoveInCombat {};
@@ -56,13 +57,14 @@ class COMPONENT {
 		class PlaceMine {};
 		class RadioCallForSupport {};
 		class RadioCommsEnemy {};
-		class RadioReportThreat {};
 		class ReinforcementResponse {};
 		class FireWeapon {};
 		class SuppressDirection {};
 		class SuppressingShots {};
 		class ThrowGrenade {};
 		class WatchEnemy {};
+		class PrepToFire {};
+		class exitFiring {};
 		class SearchBuilding {};
 		class VehicleEject {};
 	};
@@ -72,6 +74,7 @@ class COMPONENT {
 		class assignToArea {};
 		class CommanderHandler {};
 		class CommanderInit {};
+        class RadioReportThreat {};
 	};
 
     class create {
@@ -85,6 +88,7 @@ class COMPONENT {
         class createWaypoint {};
         class createWaypointModified {};
         class createWaypoints {};
+        class createSubGroup {};
         class createZone {};
         class finishGroupSpawn {};
         class finishVehicleSpawn {};
@@ -111,15 +115,21 @@ class COMPONENT {
     class Diag {
     	file = "modules\headless_ai\functions\Diag";
     	class checkView {};
+    	class clearSight {};
     	class closestEnemy {};
     	class ClosestObject {};
     	class DriverCheck {};
     	class EnemyArray {};
+    	class getGrenades {};
+    	class getMuzzles {};
     	class getStance {};
+    	class getWeaponType {};
     	class hasMine {};
     	class hasAT {};
     	class hasMG {};
     	class hasUGL {};
+    	class UGLRoundType {};
+    	class muzzleMags {};
     	class HasRadioGroup {};
     	class IRCheck {};
     	class isAimed {};
@@ -128,6 +138,7 @@ class COMPONENT {
     	class LOSCheck {};
     	class tempRemovePrimaryMags {};
     	class nearbyFriendlyEntities {};
+    	class randPos {};
     };
 
     class Eventhandlers {
@@ -137,7 +148,6 @@ class COMPONENT {
 
     class get {
 		file = "modules\headless_ai\functions\get";
-	    class getBuildingList {};
 	    class getBuildings {};
 	    class getGroupVariables {};
 	    class getNearestBuilding {};
@@ -169,24 +179,30 @@ class COMPONENT {
 		file = "modules\headless_ai\functions\Main";
 		class GroupHandler {};
 		class initMain {};
-		class MapMarkers {};
 	};
 
 	class Misc {
 		file = "modules\headless_ai\functions\Misc";
 		class checkifHC {};
+        class deleteVehicles {};
+        class findUniqueName {};
+        class initPostMan {};
+        class searchNestedArray {};
+        class setInit {};
 		class setunitskill {};
-		class UnitInit {};
-		class SetInit {};
-		class initPostMan {};
-		class findUniqueName {};
-		class deleteVehicles {};
-		class searchNestedArray {};
+		class targetHelper {};
+		class unitInit {};
+	};
+
+    class Responses {
+		file = "modules\headless_ai\functions\Responses";
+		class responseDefend {};
+		class responseAttack {};
+		class responseChance {};
 	};
 
     class set {
 		file = "modules\headless_ai\functions\set";
-	    class setAssignedVehicle {};
 	    class setBuildingPos {};
 	    class setFlashlights {};
 	    class setGroupBehaviour {};
@@ -200,10 +216,11 @@ class COMPONENT {
 
     class SightAidSM {
 		file = "modules\headless_ai\functions\SightAidSM";
-		class SA_OnSECheckNearbyEnemies {};
-		class SA_OnSECombatMode {};
-		class SA_onSEEnemyInRange {};
-		class SA_OnSERemoveCantSeeEnemy {};
+		class SA_condEnemyInRange {};
+		class SA_condSameEnemy {};
+		class SA_condCanSee {};
+		class SA_onSECombat {};
+		class SA_onSEWait {};
 	};
 
 	class StateMachine {
@@ -224,30 +241,18 @@ class COMPONENT {
 
 	class task {
 		file = "modules\headless_ai\functions\task";
+	    class taskAmbientFire {};
 	    class taskAssign {};
 	    class taskAssault {};
+	    class taskCover {};
 	    class taskDropOff {};
 	    class taskLoiter {};
 	    class taskHoldUntil {};
 	    class taskRelease {};
-	    class taskBuildingPatrol {};
-	    class taskBuildingDefend {};
-	    class taskMoveBuilding {};
-	    class taskMoveBuildings {};
-	    class taskMoveGroupBuildingsDefend {};
-	    class taskMoveGroupBuildingsPatrol {};
-	    class taskMoveMultipleBuildingsDefend {};
-	    class taskMoveMultipleBuildingsPatrol {};
-	    class taskMoveNearestBuildingDefend {};
-	    class taskMoveNearestBuildingPatrol {};
-	    class taskMoveRandomBuildingDefend {};
-	    class taskMoveRandomBuildingPatrol {};
-	    class taskMoveRandomGroupBuildingsDefend {};
-	    class taskMoveRandomGroupBuildingsPatrol {};
-	    class taskMoveRandomMultipleBuildingsDefend {};
-	    class taskMoveRandomMultipleBuildingsPatrol {};
+		class taskRetreat {};
 	    class taskSearchNearby {};
 	    class taskPickup {};
+	    class taskHunt {};
 	    class taskBunker {};
         class taskDefend {};
         class taskAttack {};
@@ -255,6 +260,7 @@ class COMPONENT {
 	    class taskStationary {};
 	    class taskPatrol {};
 	    class taskPatrolPerimeter {};
+        class taskGarrison {};
 	};
 
     class UnitStanceSM {
@@ -262,6 +268,6 @@ class COMPONENT {
 		class US_onSEInitial {};
 		class US_onSEResetStance {};
 		class US_onSEStanceCheck {};
-		class US_onSEUnitChecks {};
+		class US_onSESuppressionCheck {};
 	};
 };

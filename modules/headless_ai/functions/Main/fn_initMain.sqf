@@ -5,7 +5,8 @@ GVAR(BasicCheckCurrent) = 0;
 GVAR(LeaderExecuteCurrent) = 0;
 GVAR(MarkerArray) = [];
 GVAR(markerTrackedGroups) = createHashMap;
-
+GVAR(OccupiedPositions) = [];
+GVAR(sideEnemyTargets) = createHashMap;
 
 //StateMachines
 LOG("creating bunkerStateMachine");
@@ -28,14 +29,15 @@ if (GVAR(stanceFeature)) then {
 
 //Main Functions
 [{
-	[] call FUNC(GroupHandler);
-    if (GETMVAR(UseMarkers,false)) then {
-        [] call FUNC(MapMarkers);
-    };
     //Commander Functions
     if (GVAR(CommanderEnabled)) then {
+        GVAR(CommanderAssets) = [];
     	[] call FUNC(CommanderInit);
     };
+	[] call FUNC(GroupHandler);
+    //if (GETMVAR(UseMarkers,false)) then {
+    //    [] call FUNC(MapMarkers);
+    //};
 }, []] call CBA_fnc_execNextFrame;
 
 //Spawns initial HC arrays
@@ -58,43 +60,47 @@ if (GVAR(InitialSpawn) isNotEqualTo []) then {
 	}, [_InitialSpawn]] call CBA_fnc_execNextFrame;
 };
 
-if ((GVAR(InitialRandomSpawnsCount) > 1) && {(GVAR(InitialRandomSpawns) isNotEqualTo [])}) then {
+if ((GVAR(InitialRandomSpawnsCount) >= 1) && {(GVAR(InitialRandomSpawns) isNotEqualTo [])}) then {
 	//construct InitialRandomSpawns array
-	private _InitialRandomSpawns = [];
+	private _initialRandomSpawns = [];
 	{
-	    _x params ["_element", "_weight"];
-		_InitialRandomSpawns pushBack _element;
-		_InitialRandomSpawns pushBack _weight;
+	    if (_x isEqualType "") then {
+            private _arrayName = _x;
+            private _weight = GVAR(InitialRandomSpawns) deleteAt (_forEachIndex + 1);
+            _initialRandomSpawns pushBack _arrayName;
+    		_initialRandomSpawns pushBack _weight;
+        };
 	} forEach GVAR(InitialRandomSpawns);
-	LOG_1("InitialRandomSpawns %1",_InitialRandomSpawns);
+	LOG_1("InitialRandomSpawns %1",_initialRandomSpawns);
 	[{
-		params ["_InitialRandomSpawns"];
-		private _InitialRandomSpawnsSelected = [];
-		for "_a" from 0 to (GETMVAR(InitialRandomSpawnsCount,1)) step 1 do {
-		    private _selected = selectRandomWeighted _InitialRandomSpawns;
-			_InitialRandomSpawnsSelected pushBack _selected;
-			_InitialRandomSpawns - [_selected];
+		params ["_initialRandomSpawns"];
+		private _initialRandomSpawnsSelected = [];
+		for "_a" from 1 to (GETMVAR(InitialRandomSpawnsCount,1)) step 1 do {
+		    private _selected = selectRandomWeighted _initialRandomSpawns;
+			_index = _initialRandomSpawns find _selected;
+			_initialRandomSpawnsSelected pushBackUnique _selected;
+			_initialRandomSpawns deleteRange [_index, 2];
 		};
-		if (GVAR(_InitialRandomSpawnsSelected) isNotEqualTo []) then {
+		if (_initialRandomSpawnsSelected isNotEqualTo []) then {
 			[{
-				params ["_InitialRandomSpawnsSelected"];
+				params ["_initialRandomSpawnsSelected"];
 				{
 					private _logic = missionNamespace getVariable [_x, objNull];
 					if (isNull _logic) then {
-						LOG_1("Could not find arrayName %1",_x);
+						ERROR_MSG_1("Could not find arrayName %1",_x);
 				    } else {
 						_x call FUNC(spawnArray);
 					};
-				} foreach _InitialRandomSpawnsSelected;
-			}, [_InitialRandomSpawnsSelected]] call CBA_fnc_execNextFrame;
+				} foreach _initialRandomSpawnsSelected;
+			}, [_initialRandomSpawnsSelected]] call CBA_fnc_execNextFrame;
 		};
-	}, [_InitialRandomSpawns]] call CBA_fnc_execNextFrame;
+	}, [_initialRandomSpawns]] call CBA_fnc_execNextFrame;
 };
 
 //ForceTime
 if (!(hasInterface) && {!(isServer)}) then {
 	setViewDistance GVAR(AIViewDistance);
-	setTerrainGrid 6.25;
+	setTerrainGrid (GETMVAR(AITerrainDetail,3.125));
 	if (GVAR(ForceTimeEnable)) then {
 		private _forcedDate = [date select 0, date select 1, date select 2, GVAR(ForceTime) select 0, GVAR(ForceTime) select 1];
 		GVAR(TimeHandlePFH) = [{

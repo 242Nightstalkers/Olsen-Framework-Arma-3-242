@@ -3,15 +3,15 @@
 
 //FUNC(CombatResponse)
 
-params ["_group", ["_radioEnemy", objnull, [objnull]], ["_reinforcement", false, [false]]];
+params ["_group", ["_radioEnemy", objNull, [objNull]], ["_reinforcement", false, [false]]];
 
 private _leader = leader _group;
-private _currentmission = SETVAR(_group,Task,"NONE");
+private _currentmission = GETVAR(_group,Task,"NONE");
 if (behaviour _leader isEqualTo "SAFE") then {
 	_group setbehaviour "AWARE";
 };
-private _currenttarget = GETVAR(_group,CurrentTarget,objnull);
-if ((_radioEnemy isNotEqualTo objnull) && {(_currenttarget isEqualTo objnull)}) then {
+private _currenttarget = GETVAR(_group,CurrentTarget,objNull);
+if ((_radioEnemy isNotEqualTo objNull) && {(_currenttarget isEqualTo objNull)}) then {
 	_currenttarget = _radioEnemy;
 	SETVAR(_group,CurrentTarget,_radioEnemy);
 };
@@ -25,69 +25,72 @@ switch _currentmission do {
 	case "PATROL": {
 			if (_enemydist <= 150) then {
 				if (_reinforcement) then {
-					[_Group, _currenttarget] call FUNC(CombatAttack);
+					[_group, _currenttarget] call FUNC(CombatAttack);
 				} else {
-					[_Group, _currenttarget] call FUNC(CombatDefend);
+					[_group, _currenttarget] call FUNC(CombatDefend);
 				};
 			} else {
 				if (_reinforcement) then {
-					[_Group, _currenttarget] call FUNC(CombatMoveTo);
+					[_group, _currenttarget] call FUNC(CombatMoveTo);
 				} else {
-					[_Group, _currenttarget] call FUNC(CombatDefend);
+					[_group, _currenttarget] call FUNC(CombatDefend);
 				};
 			};
 		};
 	case "LOITER": {
-			_Group setSpeedMode "FULL";
-			{_x setUnitPos "Auto";} foreach (units _group);
+			_group setSpeedMode "FULL";
+			units _group apply {
+                _x doFollow leader _group;
+                _x setUnitPos "Auto";
+            };
 			if (_reinforcement) then {
-				[_Group, _currenttarget] call FUNC(CombatAttack);
+				[_group, _currenttarget] call FUNC(CombatAttack);
 			} else {
-				[_Group, _currenttarget] call FUNC(CombatDefend);
+				[_group, _currenttarget] call FUNC(CombatDefend);
 			};
 		}; //regroups unit via a different function
 	case "IDLE": {
 			if (_enemydist < 150) then {
 				if (_reinforcement) then {
-					[_Group, _currenttarget] call FUNC(CombatAttack);
+					[_group, _currenttarget] call FUNC(CombatAttack);
 				} else {
-					[_Group, _currenttarget] call FUNC(CombatDefend);
+					[_group, _currenttarget] call FUNC(CombatDefend);
 				};
 			} else {
 				if (_reinforcement) then {
-					[_Group,_currenttarget,_enemydir] call FUNC(CombatMoveTo);
+					[_group,_currenttarget,_enemydir] call FUNC(CombatMoveTo);
 				} else {
-					[_Group,_currenttarget,_enemydir] call FUNC(CombatDefend);
+					[_group,_currenttarget,_enemydir] call FUNC(CombatDefend);
 				};
 			};
 		};
 	case "NONE": {
 			if (_enemydist < 150) then {
 				if (_reinforcement) then {
-					[_Group, _currenttarget] call FUNC(CombatAttack);
+					[_group, _currenttarget] call FUNC(CombatAttack);
 				} else {
-					[_Group, _currenttarget] call FUNC(CombatDefend);
+					[_group, _currenttarget] call FUNC(CombatDefend);
 				};
 			} else {
 				if (_reinforcement) then {
-					[_Group, _currenttarget] call FUNC(CombatMoveTo);
+					[_group, _currenttarget] call FUNC(CombatMoveTo);
 				} else {
-					[_Group, _currenttarget] call FUNC(CombatDefend);
+					[_group, _currenttarget] call FUNC(CombatDefend);
 				};
 			};
 		};
 	default {
 		if (_enemydist < 150) then {
 			if (_reinforcement) then {
-				[_Group, _currenttarget] call FUNC(CombatAttack);
+				[_group, _currenttarget] call FUNC(CombatAttack);
 			} else {
-				[_Group, _currenttarget] call FUNC(CombatDefend);
+				[_group, _currenttarget] call FUNC(CombatDefend);
 			};
 		} else {
 			if (_reinforcement) then {
-				[_Group, _currenttarget] call FUNC(CombatMoveTo);
+				[_group, _currenttarget] call FUNC(CombatMoveTo);
 			} else {
-				[_Group, _currenttarget] call FUNC(CombatDefend);
+				[_group, _currenttarget] call FUNC(CombatDefend);
 			};
 		};
 	};

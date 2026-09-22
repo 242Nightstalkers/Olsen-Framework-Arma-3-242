@@ -1,13 +1,12 @@
 #include "script_component.hpp"
 
+params ["_groupcaller", ["_enemycaller", objNull, [objNull]]];
 
-params ["_groupcaller", ["_enemycaller", objnull, [objnull]]];
-
-private _sidecaller = side _groupcaller;
+private _sideCaller = side _groupcaller;
 private _posCaller = getposATL leader _groupcaller;
 
 if (GVAR(Debug)) then {
-	TRACE_3("radiocomms params",_groupcaller,_enemycaller,_sidecaller);
+	TRACE_3("radiocomms params",_groupcaller,_enemycaller,_sideCaller);
 };
 
 private _respondingInfantry = [];
@@ -15,7 +14,7 @@ private _respondingMotorized = [];
 private _respondingMechanized = [];
 private _respondingArmored = [];
 
-private _knownEnemy = (_enemycaller isNotEqualTo objnull);
+private _knownEnemy = (_enemycaller isNotEqualTo objNull);
 private _nearbyEnemy = [];
 private _enemyHasArmored = false;
 private _enemyHasVehicles = false;
@@ -33,13 +32,26 @@ if (_knownEnemy) then {
 allGroups select {
 	private _leader = leader _x;
 	(GETVAR(_x,Spawned,false)) &&
-	{(_groupcaller isNotEqualTo _x)} &&
+	{_sideCaller isEqualTo side _leader} &&
+	{_groupcaller isNotEqualTo _x} &&
 	{!(isNull _leader)} &&
-	{(alive _leader)} &&
+	{_leader call EFUNC(FW,isAlive)} &&
 	{!(GETVAR(_leader,NOAI,false))} &&
 	{!(isPlayer _leader)} &&
 	{!([_x] call FUNC(isInCombat))} &&
-    {!(GETVAR(_x,Reinforcing,false))}
+    {!(GETVAR(_x,Reinforcing,false))} && 
+	{
+		private _task = GETVAR(_x,Task,"NONE");
+		private _taskInfo = GVAR(Tasks) getOrDefault [_task, []];
+		_taskInfo params [
+			["_function", "", [""]],
+			["_isMove", false, [false]],
+			["_needsPos", false, [false]],
+			["_combatResponse", "", [""]],
+			["_reinforce", false, [false]]
+		];
+		_reinforce
+	}
 } apply {
 	private _group = _x;
 	//private _aliveUnits = units _group select {alive _x};
@@ -48,14 +60,14 @@ allGroups select {
 	//private _task = GETVAR(_group,Task,"NONE");
 	//private _position = getposATL _leader;
 	//private _areaAssigned = GETVAR(_group,areaAssigned,"NONE");
-	private _assetType = GETVAR(_group,assetType,"Infantry");
+	private _assetType = GETVAR(_group,assetType,"INFANTRY");
 	//private _groupcount = count _aliveUnits;
 	//private _behaviour = behaviour _leader;
-	private _target = GETVAR(_group,CurrentTarget,objnull);
+	private _target = GETVAR(_group,CurrentTarget,objNull);
 	private _distanceToGroup = (leader _groupcaller) distance2d _leader;
     if (
-    	([_sidecaller, _side] call BIS_fnc_sideIsFriendly) &&
-    	{!_knownEnemy || {_target isEqualTo objnull} || {!(_target in _nearbyEnemy)}} &&
+    	([_sideCaller, _side] call BIS_fnc_sideIsFriendly) &&
+    	{!_knownEnemy || {_target isEqualTo objNull} || {!(_target in _nearbyEnemy)}} &&
     	{_distanceToGroup <= GVAR(RadioDistance)} &&
     	{!(GETMVAR(RadioNeedRadio,false)) || {(_group call FUNC(hasRadioGroup)) select 0}}
     ) then {

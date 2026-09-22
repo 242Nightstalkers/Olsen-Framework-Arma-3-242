@@ -7,9 +7,11 @@ params [
 ];
 
 //LOG_1("setstance: %1",_this);
-TRACE_3("setstance",_unit,_groupStance,_unitStance);
+if (GETMVAR(VerboseDebug,false)) then {
+    TRACE_3("setstance",_unit,_groupStance,_unitStance);
+};
 
-private _stance = if ((_groupStance != "Auto") && {_unitStance == "Auto"}) then {
+private _stance = if (_unitStance == "Auto") then {
     _groupStance
 } else {
     _unitStance

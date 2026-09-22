@@ -15,7 +15,7 @@ _groupSet params [
     /* 6 */  ["_groupStance", "AUTO", [""]],
     /* 7 */  ["_groupInit", false, [false, {}, ""]],
     /* 8 */  ["_createRadius", 0, [0]],
-    /* 9 */  ["_taskRadius", 30, [0]],
+    /* 9 */  ["_taskRadius", 100, [0]],
     /* 10 */ ["_taskWait", 3, [0]],
     /* 11 */ ["_startBuilding", false, [false]],
     /* 12 */ ["_task", "PATROL", [""]],
@@ -37,30 +37,66 @@ _groupSet params [
 [_group,_groupSet] call FUNC(setGroupVariables);
 _group call CBA_fnc_clearWaypoints;
 
-if (_task isEqualTo "MANUAL" || (GETVAR(leader _group,noAI,false)) || (GETVAR(_group,noAI,false)) || {(count _waypoints > 1) && {_task isEqualTo "NONE"}}) then {
-    LOG_2("Setting %1 to manual wp mode with: %2",_group,_waypoints);
+if (
+    _task isEqualTo "MANUAL" ||
+    (GETVAR(leader _group,noAI,false)) ||
+    (GETVAR(_group,noAI,false)) ||
+    {(count _waypoints > 1) && {_task isEqualTo "NONE"}}
+) then {
+    if (GETMVAR(VerboseDebug,false)) then {
+        LOG_2("Setting %1 to manual wp mode with: %2",_group,_waypoints);
+    };
     _waypoints deleteAt 0;
     [_group, _waypoints] call FUNC(createWaypoints);
 } else {
+    private _retreatPos = GETVAR(_group,retreatPos,objNull);
+    if (_retreatPos isNotEqualTo objNull) then {
+        _retreatThreshold = GETVAR(_group,retreatThreshold,0.5);
+        _retreatCount = floor((count units _group) * _retreatThreshold);
+        [{  
+            _group = _this select 0;
+            _retreatCount = _this select 2;
+            _subGroup = _group getVariable["subGroup", objNull];
+            _subGroupCount = 0;
+            if (_subGroup isNotEqualTo objNull) then {
+                _subGroupCount = count units _subGroup;
+            };
+            (({ alive _x } count units _group) + _subGroupCount) <= _retreatCount;
+        }, {
+            params ["_group", "_retreatPos", "_retreatCount"];
+            [_group, "RETREAT", _retreatPos, 50] call FUNC(taskAssign);
+        }, [_group, _retreatPos, _retreatCount]] call CBA_fnc_waitUntilAndExecute;
+    };
+
     if (GETVAR(_group,vehCargo,false)) then {
         SETVAR(_group,vehCargoOrigTask,_task);
         private _veh = vehicle leader _group;
         private _cargoGroups = GETVAR(_veh,vehCargoGroups,[]);
         _cargoGroups pushBackUnique _group;
         SETVAR(_veh,vehCargoGroups,_cargoGroups);
-        TRACE_2("vehCargoGroups added",_veh,_cargoGroups);
+        if (GETMVAR(VerboseDebug,false)) then {
+            TRACE_2("vehCargoGroups added",_veh,_cargoGroups);
+        };
         _task = "CARGO";
         [_group] call FUNC(taskRelease);
     };
-    LOG_2("Setting %1 to task: %2",_group,_task);
-    private _manualPos = GETVAR(_group,taskPos,[ARR_3(0,0,0)]);
-    private _taskPos = if (_manualPos isEqualTo [0,0,0]) then {
-        _groupPos
-    } else {
-        _manualPos
+    if (GETMVAR(VerboseDebug,false)) then {
+        LOG_2("Setting %1 to task: %2",_group,_task);
     };
-    TRACE_2("",_group,_taskPos);
-    private _passarray = [_group,_task,_taskPos,_taskRadius,_wait,_behaviour,_combat,_speed,_formation,_occupyOption];
+    private _taskPos = _groupPos;
+    private _taskPosValue = GETVAR(_group,taskPos,[ARR_3(0,0,0)]);
+    if (_taskPosValue isEqualType "" && {markerColor _taskPosValue isNotEqualTo ""}) then {
+        _taskPos = markerPos _taskPosValue;
+        _taskRadius = (markerSize _taskPosValue select 0) max (markerSize _taskPosValue select 1);
+    } else {
+        if (_taskPosValue isNotEqualTo [0,0,0]) then {
+            _taskPos = _taskPosValue;
+        };
+    };
+    if (GETMVAR(VerboseDebug,false)) then {
+        TRACE_2("",_group,_taskPos);
+    };
+    private _passarray = [_group,_task,_taskPos,_taskRadius,_taskWait,_behaviour,_combat,_speed,_formation];
     [{(count waypoints (_this select 0)) isNotEqualTo 0},{
         _this call FUNC(taskAssign);
     },_passarray] call CBA_fnc_waitUntilAndExecute;

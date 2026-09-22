@@ -34,7 +34,17 @@ if (_identity isNotEqualTo []) then {
     }] remoteExec ["BIS_fnc_call", 0, true];
 };
 
-private _unitInit = GETVAR(_unit,unitInit,false);
-if (_unitInit isEqualType {}) then {
-    _unit call _unitInit;
+private _init = GETVAR(_unit,init,false);
+if (_init isEqualType {}) then {
+    _unit call _init;
+};
+
+// only check for radios if it is required!
+if (GETMVAR(RadioNeedRadio,false)) then {
+    private _acreItems = uniqueUnitItems _unit;
+    private _hasRadio = (GVAR(acreRadiosArray) findIf {
+        _x in _acreItems
+    }) isNotEqualTo -1;
+    TRACE_2("radio check",_unit,_hasRadio);
+    SETVAR(_unit,hasRadio,_hasRadio);
 };

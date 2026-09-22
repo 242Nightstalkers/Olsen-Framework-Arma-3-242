@@ -13,6 +13,7 @@ private _vehLog = [];
 private _entities = [];
 _uniqueSynced apply {
     private _obj =  _x;
+    ESETVAR(_obj,FW,DontTrack,true);
     if (_obj isKindOf "Logic") then {
     } else {
         if (_obj isKindOf "Thing") then {

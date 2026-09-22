@@ -7,7 +7,7 @@ of reinforcements or subsequent AOs.
 
 // Array objects
 // eg: ["mainEnemy", "patrol_1", "patrol_2", "patrol_3"]
-arrayObjects[] = {"hc0", "hc1", "hc2", "hc3", "hc4"};
+arrayObjects[] = {"hc_1", "hc_2", "hc_3", "hc_4", "hc_5"};
 
 // Initial spawns are spawned upon init, at the start of the mission.
 // eg: ["mainEnemy"]
@@ -22,21 +22,26 @@ initialRandomSpawnsCount = 0;
 
 // Debug message settings
 debug = true;
-verboseDebug = true;
+verboseDebug = false;
 groupDebug = false;
 // Turn on map markers that track AI movement
 useMarkers = true;
 
 // Custom viewdistance for the AI
 AIViewDistance = 2500;
-// Forces Time on the HC to simulate better AI at night [HOUR,MINUTE]
-forceTimeEnable = true;
+// value between 3.125 and 50, the lower the more terrain detail
+AITerrainDetail = 3.125;
+/* Forces Time on the HC to simulate better AI at night [HOUR,MINUTE]
+This setting should only be used to either increase AI sighting ability at night or to make the AI slower to detect in the day time
+There is no need to enable this setting if you are in the day time and want the AI to react as if it is the day time, likewise if it is night and you want the typical
+night behaviour. forceTime is the time in hour, then minute. */
+forceTimeEnable = false;
 forceTime[] = {12,00};
 
 // AI system options
 feature = true;
 enemyUpdateFrequency = 5;
-stateMachineFrames = 2;
+stateMachineFrames = 1;
 //attempts to find a better safe area for a vehicle to spawn in. Should only be used when neccessary.
 saferVehSpawning = false;
 
@@ -47,6 +52,21 @@ cacheAllPlayers = true;
 
 stanceFeature = true;
 
+// Whether or not the AI will lower their stance in response to suppression
+stanceFeatureSuppression = true;
+// How suppressed the AI needs to be on a scale of 0 to 1 to lower their stance. Double this threshold is when they will attempt to go prone.
+stanceFeatureSuppressionThreshold = 0.35;
+// How long the AI will lower their stance for in response to suppression in seconds, before gaining resistance
+stanceFeatureSuppressionDuration = 7;
+// How long the AI will be resistant to the effects of suppression in their stance, after the above duration
+stanceFeatureSuppressionResistance = 3;
+
+// buildings will only be 'claimed' by one group occupying them, if set to false each building position is available regardless if another group is within the building
+garrisonExcludeClaimedBuildings = true;
+
+// whether or not AI will ignore the direction they are facing and be able to detect enemies behind them (mostly for bunker AI)
+// can be individually set on units with `[this, "ignoreDirection", true] call PZAI_fnc_setInit`
+ignoreDirection = false;
 // How far can the AI hear gunshots from?
 hearingDistance = 2000;
 // How revealed an enemy is from a gunshot report
@@ -58,6 +78,8 @@ radioWait = 30;
 radioNeedRadio = false;
 // Distance the AI will patrol to by default
 patrolDistance = 200;
+// Whether the AI will search buildings in casual (enemy not detected) patrolling task
+patrolSearchBuilding = false;
 // Whether the AI will patrol between garrison positions. Pretty buggy, but nice for 'mersion
 garrisonPatrol = false;
 // Default group reinforcement behaviour
@@ -70,10 +92,6 @@ QRF_Distance = 2500;
 mountStatics = true;
 // Distance AI will mount empty statics from - maximum of 100m
 mountStaticsDistance = 50;
-// Should AI use smoke grenades? Besides default A3 behavior?
-usesmoke = false;
-// Percentage chance of AI using grenades
-grenadechance = 45;
 // AI will automatically disembark from vehicles when in combat.
 AIDisembark = true;
 // How low should an AI's mag count be for them to consider finding more ammo? This DOES NOT include the mag loaded in the gun already.

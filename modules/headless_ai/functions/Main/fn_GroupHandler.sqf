@@ -20,90 +20,88 @@ GVAR(GroupHandlerPFH) = [{
         private _task = GETVAR(_group,Task,"NONE");
         private _position = getposATL _leader;
         private _areaAssigned = GETVAR(_group,areaAssigned,"NONE");
-        private _assetType = GETVAR(_group,assetType,"Infantry");
+        private _assetType = GETVAR(_group,assetType,"INFANTRY");
         private _groupcount = count _aliveUnits;
         private _behaviour = behaviour _leader;
         private _target = GETVAR(_group,CurrentTarget,objNull);
-        if (
-            _target isNotEqualTo objNull &&
-            {
-                assignedTarget _leader isEqualTo objNull ||
+        // TODO: more consistent target reset and first detection reactions
+        if (assignedTarget _leader isEqualTo objNull) then {
+            // reset target to objNull
+            if (_target isNotEqualTo objNull) then {
+                _target = objNull;
+                SETVAR(_group,CurrentTarget,objNull);
+            };
+            // reset back to original task?
+        } else {
+            if (
+                _target isEqualTo objNull &&
                 {!(_target call EFUNC(FW,isAlive))}
-            }
-        ) then {
-            _target = objNull;
-            SETVAR(_group,CurrentTarget,objNull);
-        };
-        //if (_target isEqualTo objNull && {assignedTarget _leader isNotEqualTo objNull}) then {
-        //    TRACE_2("set target on active group",_group,_target);
-        //    _target = leader (assignedTarget _leader);
-        //    if (_target isEqualTo objNull) then {
-        //        private _targetCounter = GETVAR(_group,NullTargetCounter,0);
-        //        if (_targetCounter >= 5) then {
-        //            TRACE_1("no longer in combat, exiting and resetting",_group);
-        //            SETVAR(_group,NullTargetCounter,0);
-        //            private _originalBeh = GETVAR(_group,behaviour,"AWARE");
-        //            private _originalCM = GETVAR(_group,combatMode,"YELLOW");
-        //            private _originalSpeed = GETVAR(_group,speed,"normal");
-        //            private _originalForm = GETVAR(_group,formation,"wedge");
-        //            [_group,_originalBeh,_originalCM,_originalSpeed,_originalForm] call FUNC(setGroupBehaviour);
-        //            private _originalTask = GETVAR(_group,OriginalTask,"PATROL");
-        //            private _originalPos = GETVAR(_group,Pos,getPos leader _group);
-        //            private _originalRadius = GETVAR(_group,taskRadius,30);
-        //            [_group,_originalTask,_originalPos,_originalRadius] call FUNC(taskAssign);
-        //        } else {
-        //            _targetCounter = _targetCounter + 1;
-        //            SETVAR(_group,NullTargetCounter,_targetCounter);
-        //        };
-        //    } else {
-        //        SETVAR(_group,CurrentTarget,_target);
-        //    };
-        //} else {
-        //    SETVAR(_group,NullTargetCounter,0);
-        //};
-        if (GETMVAR(UseMarkers,false)) then {
-            //TRACE_2("",GVAR(markerTrackedGroups),str _group);
-            GVAR(markerTrackedGroups) set [str _group, [
-                _group,
-                _side,
-                _leader,
-                _groupcount,
-                _task,
-                _behaviour,
-                _target,
-                _position,
-                _areaAssigned,
-                _assetType
-            ]]
-        };
-        if (CBA_missionTime >= _lastTimeChecked + 3) then {
-            private _inCombat = (_behaviour in ["COMBAT","STEALTH"]) && {!(GETVAR(_group,taskCombatModeSet,false))};
-            //TRACE_2("inCombat check",_group,_inCombat);
-            if (_inCombat || {(_target isNotEqualTo objnull)}) then {
-                //switch tasks on actions
-                //handle for special loiter task - regroup
-                if (_task isEqualTo "LOITER") then {
-                    _group setSpeedMode "FULL";
-        			_units apply {_x setUnitPos "Auto"; _x doFollow _leader};
-                    [_group, _target] call FUNC(CombatDefend);
+            ) then {
+                _target = assignedTarget _leader;
+                TRACE_2("set target on active group",_group,_target);
+                SETVAR(_group,CurrentTarget,_target);
+                // react
+                // switch tasks on actions
+                private _taskInfo = GVAR(Tasks) getOrDefault [_task, []];
+                _taskInfo params [
+                    ["_function", "", [""]],
+                    ["_isMove", false, [false]],
+                    ["_needsPos", false, [false]],
+                    ["_combatResponse", "", [""]],
+                    ["_reinforce", false, [false]]
+                ];
+                if (_combatResponse isNotEqualTo "") then {
+                    [_group, _target] call (missionNamespace getVariable [_combatResponse, {}]);
                 };
-                if (_task in ["PATROL", "PERIMPATROL", "SENTRY", "BLDMOVE"]) then {
-                    //TRACE_2("non combat task check",_group,_task);
-                    [_group, _target] call FUNC(CombatDefend);
-                };
+                //vehicle dismount cargo if able 
+                //if (vehicle _leader isNotEqualTo _leader) then {
+                //    private _vehicle = vehicle _leader;
+                //    if (canMove _vehicle) then {
+                //        driver _vehicle forceSpeed 0;
+                //        private _cargoUnits = fullCrew [_vehicle, "cargo"];
+                //        if (_cargoUnits isNotEqualTo []) then {
+                //            _cargoUnits apply {
+                //                _x moveOut _vehicle;
+                //                unassignVehicle _x;
+                //            };
+                //        };
+                //        [{
+                //            (_this select 1) findIf {_x in (crew _vehicle)} isEqualTo -1
+                //        }, {
+                //            params ["_vehicle", "_cargoUnits"];
+                //            driver _vehicle forceSpeed -1;
+                //        }, [_vehicle, _cargoUnits], 3, {
+                //            driver _vehicle forceSpeed -1;
+                //        }] call CBA_fnc_waitUntilAndExecute;
+                //    } else {
+                //        _units apply {
+                //            _x moveOut _vehicle;
+                //            unassignVehicle _x;
+                //        };
+                //    };
+                //};
                 //radio for help
                 if ((GETMVAR(RadioDistance,2000)) > 0) then {
-                    if (!(GETMVAR(RadioNeedRadio,false)) || {(_group call FUNC(hasRadioGroup)) select 0}) then {
+                    if (
+                        !(GETMVAR(RadioNeedRadio,false)) ||
+                        {(_group call FUNC(hasRadioGroup)) select 0}
+                    ) then {
                         private _radioWait = GETMVAR(RadioWait,30);
                         private _lastCallTime = GETVAR(_group,LastCallTime,(CBA_MissionTime - _radioWait));
-                        if (CBA_MissionTime >= (_LastCallTime + _radioWait) && {!(GETVAR(_group,Reinforcing,false))}) then {
+                        if (
+                            CBA_MissionTime >= (_lastCallTime + _radioWait) &&
+                            {!(GETVAR(_group,Reinforcing,false))}
+                        ) then {
                             TRACE_1("radio call for support",_group);
                             SETVAR(_group,LastCallTime,CBA_MissionTime);
-                            //if (GVAR(CommanderEnabled)) then {
-                            //    [_group,_target,_side] call FUNC(RadioReportThreat);
-                            //} else {
+                            if (
+                                GVAR(CommanderEnabled) &&
+                                {side _group isEqualTo (GETMVAR(CommanderSide,east))}
+                            ) then {
+                                [_group,_target] call FUNC(RadioReportThreat);
+                            } else {
                                 [_group,_target,_side] call FUNC(RadioCallForSupport);
-                            //};
+                            };
                         };
                     };
                 };
@@ -112,103 +110,206 @@ GVAR(GroupHandlerPFH) = [{
                     private _lastWaypointTime = GETVAR(_group,lastWaypointTime,CBA_MissionTime - 3);
                     private _currentWaypoint = currentWaypoint _group;
                     private _waypoints = waypoints _group;
-                    if (_currentWaypoint > (count _waypoints - 1) && {(_group getVariable [QGVAR(Task), "PATROL"]) isEqualTo "MANUAL"}) then {
+                    if (
+                        _currentWaypoint > (count _waypoints - 1) &&
+                        {(_group getVariable [QGVAR(Task), "PATROL"]) isEqualTo "MANUAL"}
+                    ) then {
                         [_group, _position] call FUNC(taskPatrol);
                     };
-                    private _nextWP = [_group, _currentWaypoint];
-                    private _waypointType = waypointType _nextWP;
-                    if ((_waypointType isEqualTo "MOVE") && {CBA_MissionTime >= _lastWaypointTime + 3}) then {
-                        //TRACE_1("non combat wp check",_group);
-                        SETVAR(_group,lastWaypointTime,CBA_MissionTime);
-                        private _statements = waypointStatements _nextWP;
-                        _statements params ["_condition", "_onAct"];
-                        private _waypointPos = waypointPosition _nextWP;
-                        private _waypointRadius = waypointCompletionRadius _nextWP;
-                        private _distance = _position distance2D _waypointPos;
-                        if (_condition isEqualTo "true" && {_distance <= _waypointRadius}) then {
-                            _nextWP setWaypointPosition [_position, -1];
-                        };
-                    };
                 };
             };
-            //commander handling
-            if (
-                (GETMVAR(CommanderEnabled,false)) &&
-                {!(GETVAR(_group,CommanderExempt,false))} &&
-                {side _group isEqualTo (GETMVAR(CommanderSide,east))}
-            ) then {
-                if (_areaAssigned isEqualTo "NONE") then {
-                    //check zones for assignments
-                    private _assigned = false;
-                    {
-                        private _namespace = missionNamespace getVariable _x;
-                        private _displayName = GETVAR(_namespace,displayName,"");
-                        //private _mission = GETVAR(_namespace,mission,"Patrol");
-                        //private _marker = GETVAR(_namespace,marker,"");
-                        //private _min = GETVAR(_namespace,min,0);
-                        private _max = GETVAR(_namespace,max,10);
-                        //private _threshold = GETVAR(_namespace,threshold,1);
-                        //private _QRFSupport = GETVAR(_namespace,QRFSupport,true);
-                        //private _assetSupport = GETVAR(_namespace,assetSupport,true);
-                        //private _withdrawalEnabled = GETVAR(_namespace,withdrawalEnabled,true);
-                        //private _resourceUse = GETVAR(_namespace,resourceUse,true);
-                        private _preferredTypes = GETVAR(_namespace,preferredTypes,"ALL");
-                        //private _terrainMode = GETVAR(_namespace,terrainMode,"Auto");
-                        //private _importance = GETVAR(_namespace,importance,_forEachIndex);
-                        private _assignedAssets = GETVAR(_namespace,assignedAssets,[]);
-                        private _controlStatus = GETVAR(_namespace,control,"Neutral");
-                        private _assetCount = count _assignedAssets;
-                        //LOG_3("Area: %1 _assetCount: %2 _max: %3",_displayName,_assetCount,_max);
-                        if (
-                            (_assetCount < _max) &&
-                            {!_assigned} &&
-                            {!(_controlStatus in ["EnemyControlled", "Contested"])} &&
-                            {(_assetType in _preferredTypes) || (_preferredTypes isEqualTo ["ALL"])}
-                        ) then {
-                            LOG_2("Sending group %1 to area %2",_group,_displayName);
-                            _assigned = true;
-                            [_group,_namespace] call FUNC(assignToArea);
-                        };
-                    } foreach GVAR(CommanderAreasParsed);
-                    if !(_assigned) then {
-                        ERROR_1("Could not find area suitable for: %1 type %2 ignoring preferred types",_group,_assetType);
-                        {
-                            private _namespace = missionNamespace getVariable _x;
-                            private _displayName = GETVAR(_namespace,displayName,"");
-                            //private _mission = GETVAR(_namespace,mission,"Patrol");
-                            //private _marker = GETVAR(_namespace,marker,"");
-                            //private _min = GETVAR(_namespace,min,0);
-                            private _max = GETVAR(_namespace,max,10);
-                            //private _threshold = GETVAR(_namespace,threshold,1);
-                            //private _QRFSupport = GETVAR(_namespace,QRFSupport,true);
-                            //private _assetSupport = GETVAR(_namespace,assetSupport,true);
-                            //private _withdrawalEnabled = GETVAR(_namespace,withdrawalEnabled,true);
-                            //private _resourceUse = GETVAR(_namespace,resourceUse,true);
-                            //private _preferredTypes = GETVAR(_namespace,preferredTypes,"ALL");
-                            //private _terrainMode = GETVAR(_namespace,terrainMode,"Auto");
-                            //private _importance = GETVAR(_namespace,importance,_forEachIndex);
-                            private _assignedAssets = GETVAR(_namespace,assignedAssets,[]);
-                            private _controlStatus = GETVAR(_namespace,control,"Neutral");
-                            private _assetCount = count _assignedAssets;
-                            //LOG_3("Area: %1 _assetCount: %2 _max: %3",_marker,_assetCount,_max);
-                            if (
-                                (_assetCount < _max) &&
-                                {!_assigned} &&
-                                {!(_controlStatus in ["EnemyControlled", "Contested"])}
-                            ) then {
-                                LOG_2("Sending group %1 to area %2",_group,_displayName);
-                                _assigned = true;
-                                [_group,_namespace] call FUNC(assignToArea);
-                            };
-                        } foreach GVAR(CommanderAreasParsed);
-                        if !(_assigned) then {
-                            ERROR_1("Could not find area suitable for: %1 sending to default zone",_group);
-                            [_group,(missionNamespace getVariable (GVAR(CommanderAreasParsed) select 0))] call FUNC(assignToArea);
-                        };
-                    };
-                };
-            };
-            SETVAR(_group,lastTimeChecked,CBA_missionTime);
+            // no enemy detected - what do?
         };
+        if (GETMVAR(UseMarkers,false)) then {
+            //TRACE_2("",GVAR(markerTrackedGroups),str _group);
+            private _key = str _group;
+            private _usedMarkers = [];
+            if !(_key in GVAR(markerTrackedGroups)) then {
+                GVAR(markerTrackedGroups) set [_key, [
+                    _group,
+                    []
+                ]];
+            } else {
+                _usedMarkers = (GVAR(markerTrackedGroups) get _key) select 1;
+            };
+            _usedMarkers params [
+                ["_tracker", "", [""]],
+                ["_dest", "", [""]],
+                ["_destLine", "", [""]],
+                ["_targetMarker", "", [""]]
+            ];
+            private _markercolour = switch (_side) do {
+                case west: {"ColorBlue"};
+                case east: {"ColorRed"};
+                case independent: {"ColorGreen"};
+                case civilian: {"ColorYellow"};
+                default {"ColorBlack"};
+            };
+            if (_tracker isEqualTo "") then {
+                _tracker = format ["trk_%1_%2",_side,_group];
+                createMarker [_tracker,[0,0]];
+                private _drawicon = switch (_assetType) do {
+                    case "Infantry": {"b_inf"};
+                    case "Motorized": {"b_motor_inf"};
+                    default {"b_inf"};
+                };
+                _tracker setMarkerShapeLocal "ICON";
+                _tracker setMarkerSizeLocal [0.5, 0.5];
+                _tracker setMarkerTypeLocal _drawicon;
+                _tracker setMarkerColor _markercolour;
+            };
+            _tracker setMarkerPos [getpos _leader select 0, getpos _leader select 1];
+            private _usetarget = _target isNotEqualTo objNull;
+            if !(_usetarget) then {
+                _target = "NONE";
+            };
+            private _text = if ((GETMVAR(CommanderEnabled,false)) && {(GETMVAR(CommanderSide,east)) isEqualTo _side}) then {
+                format ["%1 - Grpcount: %2 - Task: %3 - Area: %4 - Type: %5 - CombatMode: %6 - Target: %7",
+                    _group,
+                    _groupcount,
+                    _task,
+                    _areaAssigned,
+                    _assetType,
+                    _behaviour,
+                    _target
+                ];
+            } else {
+                format ["%1 - Grpcount: %2 - Task: %3 - CombatMode: %4 - Target: %5",
+                    _group,
+                    _groupcount,
+                    _task,
+                    _behaviour,
+                    _target
+                ];
+            };
+            //LOG_1("MarkerText: %1",_text);
+            _tracker setMarkerText _text;
+            // find appropriate dest waypoint, if any
+            if (_task in [
+                "PATROL",
+                "PERIMPATROL",
+                "SENTRY",
+                "ATTACK",
+                "ASSAULT",
+                "FLANK",
+                "MOVE",
+                "MANUAL",
+                "BLDMOVE",
+                "BLDSEARCH",
+                "PICKUP",
+                "DROPOFF"
+            ]) then {
+                private _groupWPs = waypoints _group;
+                if (_groupWPs isEqualTo []) then {
+                    if (_dest isNotEqualTo "") then {
+                        deletemarker _dest;
+                        deletemarker _destline;
+                        _dest = "";
+                        _destline = "";
+                    };
+                } else {
+                    private _currentWP = currentWaypoint _group;
+                    private _wpPos = waypointPosition [_group, _currentWP];
+                    if (
+                        _currentWP >= count _groupWPs &&
+                        {_wpPos isEqualTo [0,0,0]}
+                    ) then {
+                        if (_dest isNotEqualTo "") then {
+                            deletemarker _dest;
+                            deletemarker _destline;
+                            _dest = "";
+                            _destline = "";
+                        };
+                    } else {
+                        if (_dest isEqualTo "") then {
+                            _dest = format["dest_%1_%2", _side, _group];
+                            createMarker [_dest, [0, 0]];
+                            _dest setMarkerShapeLocal "ICON";
+                            _dest setMarkerTypeLocal "mil_marker";
+                            _dest setMarkerSizeLocal [0.25, 0.25];
+                            _dest setMarkerColorLocal _markercolour;
+                            _destline = format ["destline_%1_%2", _side, _group];
+                            createMarker [_destline, [0, 0]];
+                            _destline setMarkerShapeLocal "RECTANGLE";
+                            _destline setMarkerBrushLocal "SOLID";
+                            _destline setMarkerColorLocal _markercolour;
+                        };
+                        _dest setMarkerPos _wpPos;
+                        private _dist = (_position distance2D _wppos) / 2;
+                        private _ang = _position getDir _wppos;
+                        private _center = _position getPos [_dist, _ang];
+                        _destline setMarkerSizeLocal [1, _dist];
+                        _destline setMarkerDirLocal _ang;
+                        _destline setMarkerPos _center;
+                    };
+                };
+            } else {
+                if (_dest isNotEqualTo "") then {
+                    deletemarker _dest;
+                    deletemarker _destline;
+                    _dest = "";
+                    _destline = "";
+                };
+            };
+            if (_usetarget) then {
+                if (_target isEqualTo objNull || _target isEqualTo "NONE") then {
+                    if (_targetMarker isNotEqualTo "") then {
+                        deletemarker _targetMarker;
+                        _targetMarker = "";
+                    };
+                } else {
+                    if (_targetMarker isEqualTo "") then {
+                        _targetMarker = format["target_%1_%2",_side,_group];
+                        createMarker [_targetMarker,[0,0]];
+                        private _targettext = format ["%1",_group];
+                        _targetMarker setMarkerShapeLocal "ICON";
+                        _targetMarker setMarkerTypeLocal "mil_objective";
+                        _targetMarker setMarkerSizeLocal [0.5,0.5];
+                        _targetMarker setmarkercolorLocal _markercolour;
+                        _targetMarker setMarkerTextLocal _targettext;
+                    };
+                    _targetMarker setMarkerPos [(getpos _target select 0),(getpos _target select 1)];
+                };
+            } else {
+                if (_targetMarker isNotEqualTo "") then {
+                    deletemarker _targetMarker;
+                    _targetMarker = "";
+                };
+            };
+            _usedMarkers = [
+                _tracker,
+                _dest,
+                _destLine,
+                _targetMarker
+            ];
+            GVAR(markerTrackedGroups) set [_key, [
+                /*1*/ _group,
+                /*2*/ _usedMarkers
+            ]];
+        };
+        // AI Commander
+        if (
+            (GETMVAR(CommanderEnabled,false)) &&
+            {!(GETVAR(_group,CommanderExempt,false))} &&
+            {side _group isEqualTo (GETMVAR(CommanderSide,east))} &&
+            {!(_group in GVAR(CommanderAssets))}
+        ) then {
+            // add to commander asset array
+            GVAR(CommanderAssets) pushBackUnique _group;
+        };
+        SETVAR(_group,lastTimeChecked,CBA_missionTime);
     };
+    {
+        private _groupStr = _x;
+        private _groupArray = _y;
+        _groupArray params ["_group", "_usedMarkers"];
+        if (_group isEqualTo grpNull || leader _group isEqualTo objNull) then {
+            GVAR(markerTrackedGroups) deleteAt _groupStr;
+            if (_usedMarkers isNotEqualTo []) then {
+                _usedMarkers select {_x isNotEqualTo ""} apply {
+                    deletemarker _x;
+                };
+            };
+        };
+    } forEach GVAR(markerTrackedGroups);
 }, 1] call CBA_fnc_addPerFrameHandler;
